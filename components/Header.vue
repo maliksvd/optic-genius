@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
-
 </script>
 
 <template>
@@ -20,17 +18,18 @@ import { Button } from '@/components/ui/button'
             <div class="hidden md:block">
               <ul class="list-none flex">
                 <li>
-                  <Button variant="primary" class="transition-colors hover:text-foreground/80 text-black text-base">Find a
-                    service</Button>
+                  <UButton class="transition-colors hover:text-foreground/80 text-black text-base">Find a
+                    service</UButton>
                 </li>
-                <li><Button variant="primary" class="transition-colors hover:text-foreground/80 text-black text-base">
+                <li>
+                  <UButton class="transition-colors hover:text-foreground/80 text-black text-base">
                     <NuxtLink to="/cities">
                       Cities
                     </NuxtLink>
-                  </Button>
+                  </UButton>
                 </li>
-                <li><Button variant="primary"
-                    class="transition-colors hover:text-foreground/80 text-black text-bas">Map</Button>
+                <li>
+                  <UButton class="transition-colors hover:text-foreground/80 text-black text-bas">Map</UButton>
                 </li>
               </ul>
             </div>

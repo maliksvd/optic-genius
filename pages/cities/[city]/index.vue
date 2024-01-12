@@ -1,59 +1,4 @@
-<script lang="ts" setup>
-// import shadcn components
-
-import { useForm } from 'vee-validate'
-import { toTypedSchema } from '@vee-validate/zod'
-import * as z from 'zod'
-
-// import types
-import type { Location } from '@/types/Location'
-import type { Locations } from '@/types/Locations'
-import type { Service } from '@/types/Service'
-
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
-
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
-
-
-import { Checkbox } from '@/components/ui/checkbox'
-
-
+<script setup>
 const route = useRoute()
 
 // Dynamic route params
@@ -64,50 +9,48 @@ const borough = route.query.borough; // Define borough here
 const service = route.query.service;
 const limit = route.query.limit;
 
-// Define the form schema
-const formSchema = toTypedSchema(z.object({
-  service: z.string().optional(),
-  borough: z.string().optional(),
-  allowWalkIns: z.boolean().optional(),
-}))
+const selectedService = ref('');
+const selectedOccupation = ref('');
+const selectedBorough = ref('');
+const walkIns = ref(false);
+const hasEmergency = ref(false);
 
-// Define the form
-const form = useForm({
-  validationSchema: formSchema,
-})
+const filterModalIsOpen = ref(false)
+
 
 // Fetch data from the API with params
 const { data, pending, error, refresh } = await useFetch('/api/locations/' + city)
 
-const allLocations = ref<Location[]>(data<Locations>);
+const allLocations = ref();
+
+watchEffect(() => {
+  allLocations.value = data.value;
+});
+
+console.log(allLocations.value);
 
 // Get the services and boroughs for the filter from the local api
 const { data: getServices } = await useFetch('/api/services/');
 const { data: getBoroughs } = await useFetch('/api/boroughs?city=' + city);
 
-// if the form is submitted, filter the locations and if not, show all locations
-const isFilterFormIsSubmitted = ref(false)
+const formatBorough = ref(getBoroughs.value.boroughs)
 
-const onSubmit = form.handleSubmit((values) => {
-  console.log('Form submitted!', values)
+console.log(getBoroughs.value.boroughs);
 
-  // set the form to submitted
-  isFilterFormIsSubmitted.value = true
+const filteredLocations = computed(() => {
+  if (allLocations.value && allLocations.value.locations) {
+    return allLocations.value.locations.filter(location => {
+      const serviceMatch = !selectedService.value || location.services_offered.includes(selectedService.value);
+      const occupationMatch = !selectedOccupation.value || location.occupation_type.some(occupation => occupation.type === selectedOccupation.value);
+      const boroughMatch = !selectedBorough.value || location.borough === selectedBorough.value;
+      const walkInsMatch = !walkIns.value || location.walk_ins_welcome == 1;
+      const emergencyMatch = !hasEmergency.value || location.emergency_services == 1;
 
-  // filter the array of locations with the filters from the form
-  computed(() => {
-    const filteredLocations = allLocations.value?.locations.filter((location) => {
-      return location.services_offered.includes(values.service)
+      return serviceMatch && occupationMatch && boroughMatch && walkInsMatch && emergencyMatch;
     });
-    console.log(filteredLocations);
-
-  })
-
-  console.log(isFilterFormIsSubmitted.value);
-
-})
-
-
+  }
+  return []; // Retourne un tableau vide si allLocations n'est pas encore défini
+});
 </script>
 
 <template>
@@ -116,88 +59,60 @@ const onSubmit = form.handleSubmit((values) => {
     <main class="container mx-auto px-6 md:max-w-7xl mt-8">
       <div class="my-8">
         <div class="flex flex-col md:flex-row space-x-0 space-y-4 md:space-x-4 md:space-y-0 w-full md:w-1/2">
+          <UButton @click="filterModalIsOpen = true"
+            class="py-2 px-5 bg-black border border-transparent rounded-full text-sm font-medium text-white">
+            <Icon name="ph:dots-three-circle-duotone" class="w-5 h-5 mr-1.5" />
+            Filter results
+          </UButton>
+          <USlideover v-model="filterModalIsOpen">
+            <UCard class="flex flex-col flex-1"
+              :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+              <template #header>
+                <div class="flex items-center justify-between">
+                  <h3 class="text-base font-semibold leading-6 text-black dark:text-white">
+                    Filtres
+                  </h3>
+                  <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
+                    @click="isOpen = false" />
+                </div>
+              </template>
 
-          <Sheet>
-            <SheetTrigger>
-              <Button class="py-2 px-5 bg-black border border-transparent rounded-full text-sm font-medium text-white">
-                <Icon name="ph:dots-three-circle-duotone" class="w-5 h-5 mr-1.5" />
-                Filter results
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader class="mb-8">
-                <SheetTitle>Filter results</SheetTitle>
-                <SheetDescription>
-                  Filter results by service and borough
-                </SheetDescription>
-              </SheetHeader>
-              <form @submit="onSubmit">
+              <div class="space-y-4">
+                <UFormGroup label="Service">
+                  <USelect v-model="selectedService" :options="getServices" option-attribute="label" size="md" />
+                </UFormGroup>
+                <UFormGroup label="Occupation">
+                  <USelect v-model="selectedOccupation" :options="['', 'optician', 'optometrist', 'ophthalmologist']"
+                    size="md" />
+                </UFormGroup>
 
-                <FormField v-slot="{ componentField }" type="select"
-                  name="service"">
-                                                                                                                                                                                      <FormItem class="
-                mt-6">
-                  <FormLabel>Service</FormLabel>
-                  <Select v-bind="componentField">
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem v-for="service in getServices" :key="service.value" :value="service.value">
-                          {{ service.label }}
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                  </FormItem>
-                </FormField>
+                <UFormGroup label="Borough">
+                  <USelect v-model="selectedBorough" :options="formatBorough" option-attribute="name" size="md" />
+                </UFormGroup>
 
-                <FormField v-slot="{ componentField }" type="select"
-                  name="borough"">
-                                                                                                                                                                                      <FormItem class="
-                mt-6">
-                  <FormLabel>Borough</FormLabel>
-                  <Select v-bind="componentField">
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a borough" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem v-for="borough in getBoroughs.boroughs" :key="borough.value" :value="borough.value">
-                          {{ borough.name }}
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                  </FormItem>
-                </FormField>
+                <div class="flex space-x-8">
+                  <UFormGroup label="Accept Walk-ins">
+                    <UToggle v-model="walkIns" label="Accept Walk-ins" />
+                  </UFormGroup>
 
-                <Button class=" mt-8 w-full" type="submit">Apply filters</Button>
-              </form>
+                  <UFormGroup label="Has Emergency Services">
+                    <UToggle v-model="hasEmergency" label="Has Emergency Services" />
+                  </UFormGroup>
+                </div>
+              </div>
 
-            </SheetContent>
-          </Sheet>
+
+
+              <template #footer>
+                <Placeholder class="h-8" />
+              </template>
+            </UCard>
+          </USlideover>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div v-if="isFilterFormIsSubmitted === true">
-          <div>
-            <ul>
-              <li v-for="location in filteredLocations" :key="location.id">
-                {{ location.title }}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div v-else>
-          <div v-for="location in allLocations.locations" :key="location.id">
+      <div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div v-for="  location   in   filteredLocations  " :key="location.id">
             <img :src="location.storefrontphoto" :alt="location.title" class="w-full h-56 object-cover mb-2 rounded-md" />
             <div class="text-sm font-semibold">
               <NuxtLink :to="`/cities/${city}/${location.slug}`">{{ location.title }}</NuxtLink>

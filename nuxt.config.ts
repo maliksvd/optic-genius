@@ -2,21 +2,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
-  modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', 'nuxt-icon', '@nuxtjs/supabase'],
+  modules: ['@nuxt/ui', 'nuxt-icon', '@nuxtjs/supabase'],
+
+  colorMode: {
+    preference: 'light'
+  },
 
   supabase: {
     redirect: false,
   },
-
-  shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
-    prefix: '',
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: './components/ui'
-  }
 })
