@@ -9,9 +9,6 @@ export default defineEventHandler(async (event) => {
   const { featured } = getQuery(event);
   const {limit } = getQuery(event);
 
-  
-  console.log(city);
-
   if (city !== undefined) {
     let query = client.from('locations_prod').select('*').eq('city', city);
 
@@ -29,8 +26,6 @@ export default defineEventHandler(async (event) => {
     }
 
     const { data } = await query;
-
-    console.log(data);
 
     return { locations: data };
   } else {

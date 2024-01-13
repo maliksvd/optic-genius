@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@iconify-json/ph": "^1.1.10",
+    "@iconify/json": "^2.2.168",
     "@nuxt/ui": "^2.12.0",
     "@nuxtjs/tailwindcss": "^6.10.3",
     "@vee-validate/zod": "^4.12.4",

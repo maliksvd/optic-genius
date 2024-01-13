@@ -5,9 +5,9 @@ const route = useRoute()
 const { city } = route.params
 
 // Query params
-const borough = route.query.borough; // Define borough here
-const service = route.query.service;
-const limit = route.query.limit;
+const serviceParamURL = route.query.service;
+const boroughParamURL = route.query.borough;
+const occupationParamURL = route.query.occupation;
 
 const selectedService = ref('');
 const selectedOccupation = ref('');
@@ -19,7 +19,18 @@ const filterModalIsOpen = ref(false)
 
 
 // Fetch data from the API with params
-const { data, pending, error, refresh } = await useFetch('/api/locations/' + city)
+const queryParams = new URLSearchParams();
+if (serviceParamURL) {
+  queryParams.append('service', serviceParamURL);
+}
+if (boroughParamURL) {
+  queryParams.append('borough', boroughParamURL);
+}
+if (occupationParamURL) {
+  queryParams.append('occupation', occupationParamURL);
+}
+
+const { data, pending, error, refresh } = await useFetch('/api/locations/' + city + '?' + queryParams.toString());
 
 const allLocations = ref();
 
@@ -27,15 +38,14 @@ watchEffect(() => {
   allLocations.value = data.value;
 });
 
-console.log(allLocations.value);
+console.log(allLocations.value)
+console.log(error)
 
 // Get the services and boroughs for the filter from the local api
 const { data: getServices } = await useFetch('/api/services/');
 const { data: getBoroughs } = await useFetch('/api/boroughs?city=' + city);
 
 const formatBorough = ref(getBoroughs.value.boroughs)
-
-console.log(getBoroughs.value.boroughs);
 
 const filteredLocations = computed(() => {
   if (allLocations.value && allLocations.value.locations) {
