@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
 
   if (slug !== undefined) {
 
-    const { data } = await client
+    const { data:location } = await client
       .from('locations_prod')
       .select('*')
       .eq('slug', slug)
       .single()
 
-    return { location: data }
+    return location;
   } else {
     // Gérer le cas où 'city' est undefined
     return { location: [] }
