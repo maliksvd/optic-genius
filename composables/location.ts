@@ -12,7 +12,7 @@ export const useLocation = () => {
   const city = ref(route.params.city);
 
   const { data, pending, error, refresh } = useFetch(
-    "/api/locations/" + city.value + "/" + slug.value.join("/"),
+    "/api/locations/" + city.value + "/" + (Array.isArray(slug.value) ? slug.value.join("/") : slug.value),
     {}
   );
 
