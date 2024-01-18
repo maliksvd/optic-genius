@@ -42,8 +42,8 @@ const isOpen = isLocationOpen();
                 class="rounded-lg object-cover h-64 w-full"
               />
             </div>
-            <section class="flex flex-col md:flex-grow">
-              <div class="flex-initial w-full">
+            <section class="flex flex-col md:flex-row">
+              <div class="flex-1">
                 <h1
                   class="text-2xl md:text-3xl font-bold text-black dark:text-white"
                 >
@@ -99,6 +99,55 @@ const isOpen = isLocationOpen();
                   </p>
                 </div>
                 <UDivider class="my-8" />
+                <div id="featuresSection">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <div
+                        v-if="location.insurance_accepted"
+                        class="flex items-center"
+                      >
+                        <Icon
+                          name="i-ph-credit-card-duotone"
+                          class="h-6 w-6 mr-1"
+                        />
+                        <div>
+                          {{
+                            location.insurance_accepted === true
+                              ? "Accepts Insurance"
+                              : "Does not accept Insurance"
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      v-if="location.online_ordering_available"
+                      class="flex items-center"
+                    >
+                      <Icon name="i-ph-laptop-duotone" class="h-6 w-6 mr-1" />
+                      <div>
+                        {{
+                          location.online_ordering_available === true
+                            ? "Online Ordering Available"
+                            : "No Online Ordering Available"
+                        }}
+                      </div>
+                    </div>
+                    <div
+                      v-if="location.children_eyewear_available"
+                      class="flex items-center"
+                    >
+                      <Icon name="i-lucide-baby" class="h-6 w-6 mr-1" />
+                      <div>
+                        {{
+                          location.children_eyewear_available === true
+                            ? "Children Eyewear Available"
+                            : "No Children Eyewear Available"
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <UDivider class="my-8" />
                 <div id="geolocationSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -130,27 +179,52 @@ const isOpen = isLocationOpen();
                   {{ location.specialization }}
                 </div>
               </div>
-              <div class="bg-red-500 w-96"></div>
+              <div class="w-96">
+                <UCard>
+                  <div>
+                    <div class="flex flex-col md:flex-row items-center space-x-2">
+                      <UButton class="bg-black rounded-full">
+                        <Icon name="i-ph-phone-duotone" class="h-6 w-6 mr-1" />
+                        <a :href="'tel:' + location.phone">
+                          {{ location.phone }}
+                        </a>
+                      </UButton>
+                      <UButton class="bg-black rounded-full">
+                        <Icon
+                          name="i-ph-laptop-duotone"
+                          class="h-6 w-6 mr-1"
+                        />
+                        <a :href="'https://' + location.website">
+                          Website
+                        </a>
+                      </UButton>
+                    </div>
+                  </div>
+                </UCard>
+              </div>
             </section>
           </div>
         </div>
         <div v-else>
-          <div class="flex flex-col items-center justify-center mx-auto h-screen px-8">
+          <div
+            class="flex flex-col items-center justify-center mx-auto h-screen px-8"
+          >
             <Icon name="i-lucide-archive-x" class="h-12 w-12 mb-2" />
             <h1 class="text-lg font-bold mb-2">Location not found</h1>
             <p class="text-center">
               Sorry, we couldn't find the location you're looking for.
             </p>
-            <NuxtLink
-              to="/"
-            >
-             <UButton color="primary" variant="solid" class="mt-4 rounded-full bg-black">
-              Go back to home
-             </UButton>
+            <NuxtLink to="/">
+              <UButton
+                color="primary"
+                variant="solid"
+                class="mt-4 rounded-full bg-black"
+              >
+                Go back to home
+              </UButton>
             </NuxtLink>
-
           </div>
-          </div>
+        </div>
       </div>
     </div>
   </div>
