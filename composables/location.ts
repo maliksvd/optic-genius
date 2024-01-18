@@ -6,25 +6,28 @@
  * @returns {object} Location data
  */
 export const useLocation = () => {
+  const nuxtApp = useNuxtApp();
   const route = useRoute();
 
   const slug = ref(route.params.slug);
   const city = ref(route.params.city);
 
-  const { data, pending, error, refresh } = useFetch(
-    "/api/locations/" + city.value + "/" + (Array.isArray(slug.value) ? slug.value.join("/") : slug.value),
-    {}
-  );
+  const apiUrl = ref('/api/locations/' + city.value + '/' + (Array.isArray(slug.value) ? slug.value.join('/') : slug.value));
 
-  const getLocation = ref(data.value);
+  const { pending, data:location, error } = useFetch(apiUrl.value, {
+    key: 'location-' + slug.value,
+    lazy: true,
+    server: false,
+  })
+
+  const getLocation = ref(location.value);
 
   return {
-    getLocation,
+    pending,
     slug,
     city,
-    pending,
+    getLocation,
     error,
-    refresh,
   };
 };
 

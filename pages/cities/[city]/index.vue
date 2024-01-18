@@ -38,9 +38,6 @@ watchEffect(() => {
   allLocations.value = data.value;
 });
 
-console.log(allLocations.value)
-console.log(error)
-
 // Get the services and boroughs for the filter from the local api
 const { data: getServices } = await useFetch('/api/services/');
 const { data: getBoroughs } = await useFetch('/api/boroughs?city=' + city);
@@ -122,8 +119,8 @@ const filteredLocations = computed(() => {
       </div>
       <div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div v-for="location in filteredLocations" :key="location.id">
-            <NuxtLink :to="`/cities/${city}/${location.slug}`">
+          <div v-for="location in filteredLocations" :key="location.slug">
+            <NuxtLink :to="`/cities/${city}/${location.slug}`" :key="location.slug">
               <img :src="location.storefrontphoto" :alt="location.title" class="w-full h-56 object-cover mb-2 rounded-md" />
               <div class="text-sm font-semibold">
                 {{ location.title }}
