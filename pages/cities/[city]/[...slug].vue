@@ -100,23 +100,26 @@ const isOpen = isLocationOpen();
                 </div>
                 <UDivider class="my-8" />
                 <div id="featuresSection">
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <div
-                        v-if="location.insurance_accepted"
-                        class="flex items-center"
-                      >
-                        <Icon
-                          name="i-ph-credit-card-duotone"
-                          class="h-6 w-6 mr-1"
-                        />
-                        <div>
-                          {{
-                            location.insurance_accepted === true
-                              ? "Accepts Insurance"
-                              : "Does not accept Insurance"
-                          }}
-                        </div>
+                  <h2
+                    class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
+                  >
+                    Features
+                  </h2>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                    <div
+                      v-if="location.insurance_accepted"
+                      class="flex items-center"
+                    >
+                      <Icon
+                        name="i-ph-credit-card-duotone"
+                        class="h-6 w-6 mr-1"
+                      />
+                      <div>
+                        {{
+                          location.insurance_accepted === true
+                            ? "Accepts Insurance"
+                            : "Does not accept Insurance"
+                        }}
                       </div>
                     </div>
                     <div
@@ -142,6 +145,53 @@ const isOpen = isLocationOpen();
                           location.children_eyewear_available === true
                             ? "Children Eyewear Available"
                             : "No Children Eyewear Available"
+                        }}
+                      </div>
+                    </div>
+                    <div v-if="location.emergency" class="flex items-center">
+                      <Icon name="i-ph-siren-duotone" class="h-6 w-6 mr-1" />
+                      <div>
+                        {{
+                          location.emergency === true
+                            ? "Emergency"
+                            : "No Emergency"
+                        }}
+                      </div>
+                    </div>
+                    <div v-if="location.contact_lens" class="flex items-center">
+                      <Icon name="i-ph-eye-duotone" class="h-6 w-6 mr-1" />
+                      <div>
+                        {{
+                          location.contact_lens === true
+                            ? "Contact Lens available"
+                            : "No Contact Lens"
+                        }}
+                      </div>
+                    </div>
+                    <div
+                      v-if="location.telehealth_services"
+                      class="flex items-center"
+                    >
+                      <Icon name="i-ph-video-duotone" class="h-6 w-6 mr-1" />
+                      <div>
+                        {{
+                          location.telehealth_services === true
+                            ? "Telehealth Services"
+                            : "No Telehealth Services"
+                        }}
+                      </div>
+                    </div>
+                    <div
+                      v-if="location.average_wait_time"
+                      class="flex items-center"
+                    >
+                      <Icon name="i-ph-clock-duotone" class="h-6 w-6 mr-1" />
+                      <div>
+                        {{
+                          location.average_wait_time
+                            ? location.average_wait_time +
+                              " minutes average wait time"
+                            : "No Average Wait Time"
                         }}
                       </div>
                     </div>
@@ -178,11 +228,61 @@ const isOpen = isLocationOpen();
                   </h2>
                   {{ location.specialization }}
                 </div>
+                <UDivider class="my-8" />
+                <div id="hoursSection">
+                  <h2
+                    class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
+                  >
+                    Hours
+                  </h2>
+                  <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div
+                      v-for="(hours, day) in location.business_hours"
+                      :key="day"
+                    >
+                      <div>
+                        <strong>{{ day }}:</strong> {{ hours.open }} -
+                        {{ hours.close }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <UDivider class="my-8" />
+                <div id="paymentsSections">
+                  <h2
+                    class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
+                  >
+                    Payments options
+                  </h2>
+                  <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div
+                      v-for="(payment, index) in location.payment_options"
+                      :key="index"
+                    >
+                      <div class="flex itens-center">
+                        <Icon
+                          :name="payment.icon"
+                          class="h-6 w-6 mr-1"/>
+                        <p>{{ payment.label }}</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <UDivider class="my-8" />
+                <div id="productsSection">
+                  <h2
+                    class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
+                  >
+                    Products
+                  </h2>
+                </div>
               </div>
               <div class="w-96">
                 <UCard>
                   <div>
-                    <div class="flex flex-col md:flex-row items-center space-x-2">
+                    <div
+                      class="flex flex-col md:flex-row items-center space-x-2 w-full"
+                    >
                       <UButton class="bg-black rounded-full">
                         <Icon name="i-ph-phone-duotone" class="h-6 w-6 mr-1" />
                         <a :href="'tel:' + location.phone">
@@ -190,13 +290,8 @@ const isOpen = isLocationOpen();
                         </a>
                       </UButton>
                       <UButton class="bg-black rounded-full">
-                        <Icon
-                          name="i-ph-laptop-duotone"
-                          class="h-6 w-6 mr-1"
-                        />
-                        <a :href="'https://' + location.website">
-                          Website
-                        </a>
+                        <Icon name="i-ph-laptop-duotone" class="h-6 w-6 mr-1" />
+                        <a :href="'https://' + location.website"> Website </a>
                       </UButton>
                     </div>
                   </div>
