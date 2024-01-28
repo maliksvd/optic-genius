@@ -5,12 +5,12 @@
       <div>
         <h2 class="text-lg font-semibold">Sign in</h2>
         <p class="mb-6">via magic link with your email below.</p>
-        <div>
+        <div class="mb-8">
           <Input type="email" placeholder="Your email" v-model="email" />
-          <p v-if="errorMessage" class="text-red-500">{{ errorMessage }}</p>
         </div>
         <Button 
           type="submit" :value="loading ? 'Loading' : 'Send magic link'" :disabled="loading" :loading="loading">
+          <Icon name="i-ph:magic-wand-fill" class="mr-2" />
           Send magic link
         </Button>
       </div>
@@ -20,41 +20,40 @@
 
 <script lang="ts" setup>
 import { Input } from '@/components/ui/input'
-import { UButton } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
+
+useHead({
+  title: 'Sign in - Optic Genius',
+  meta: [
+    {
+      name: 'description',
+      content: 'Sign in to your account',
+    },
+  ],
+})
+
+definePageMeta({
+  middleware: 'auth-logged',
+})
 
 const supabase = useSupabaseClient();
 
 const loading = ref(false);
 const email = ref("");
-const errorMessage = ref("");
-
-const validateEmail = (email) => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,4}\.[0-9]{1,4}\.[0-9]{1,4}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-};
 
 const handleLogin = async () => {
-  if (!validateEmail(email.value)) {
-    errorMessage.value = "Please enter a valid email address.";
-    return;
-  }
 
   try {
     loading.value = true;
-    errorMessage.value = "";
     const { error } = await supabase.auth.signInWithOtp({
       email: email.value,
     });
     if (error) throw error;
     navigateTo("/auth/confirm");
   } catch (error) {
-    errorMessage.value = error.message;
+    console.log(error);
   } finally {
     loading.value = false;
   }
 };
 </script>
-
-<style>
-/* Add any custom styles if necessary */
-</style>
