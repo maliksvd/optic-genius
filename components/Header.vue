@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 </script>
 
 <template>
@@ -16,31 +18,36 @@
               <NuxtLink to="/">
                 <h1 class="font-semibold text-lg mr-2">Optic Genius</h1>
               </NuxtLink>
-              <UBadge color="sky" variant="subtle" size="xs" :ui="{ rounded: 'rounded-full' }">Alpha</UBadge>
+              <Badge>Alpha</Badge>
 
             </div>
             <div class="hidden md:block">
               <ul class="list-none flex">
                 <li>
-                  <UButton color="white" variant="ghost">Find a service</UButton>
+                  <Button variant="link">Find a service</Button>
                 </li>
                 <li>
-                  <UButton color="white" variant="ghost">
+                  <Button variant="link">
                     <NuxtLink to="/cities">
                       Cities
                     </NuxtLink>
-                  </UButton>
+                  </Button>
                 </li>
                 <li>
-                  <UButton color="white" variant="ghost">Map</UButton>
+                  <Button variant="link">Map</Button>
                 </li>
                 <li>
-                  <UButton color="white" variant="ghost">Education</UButton>
+                  <Button variant="link">Education</Button>
                 </li>
               </ul>
             </div>
           </div>
-          <LoginModal />
+          <Button>
+            <NuxtLink to="/login">
+              <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
+              Login / Register
+            </NuxtLink>
+          </Button>
 
         </div>
       </div>
