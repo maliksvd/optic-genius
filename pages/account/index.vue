@@ -12,18 +12,18 @@
       <div>
         <div class="flex items-center space-x-12">
           <Input
-          type="text"
-          placeholder="First name"
-          class="mt-4"
-          disabled
-          v-model="user.email"
-        />
-        <Input
-          type="text"
-          placeholder="Phone number"
-          class="mt-4"
-          v-model="profileData.phone_number"
-        />
+            type="text"
+            placeholder="First name"
+            class="mt-4"
+            disabled
+            v-model="user.email"
+          />
+          <Input
+            type="text"
+            placeholder="Phone number"
+            class="mt-4"
+            v-model="profileData.phone_number"
+          />
         </div>
         <Input
           type="text"
@@ -46,31 +46,26 @@
       </div>
 
       <div class="my-12">
-        <Button variant="destructive" @click="user.signOut()">Sign out</Button>
+        <Button variant="primary" @click="updateProfileData">Update</Button>
+        <Button variant="destructive" @click="signOut">Sign out</Button>
       </div>
-
-      {{ profileData }}
     </main>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-useHead({
-  title: "My account - Optic Genius",
-  description: "Manage your account settings and set e-mail preferences.",
-});
-
-definePageMeta({
-  middleware: 'auth'
-})
 
 const client = useSupabaseClient();
 const user = useSupabaseUser();
 
-const id = computed(() => user.value?.id);
+const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) console.log(error);
+};
+
+const id = computed(() => user.value.id);
 
 const { data: profileData } = await useAsyncData(
   "users_production",
@@ -80,12 +75,27 @@ const { data: profileData } = await useAsyncData(
       .select()
       .eq("id", id.value)
       .single();
-
     return data;
   }
 );
 
-console.log(profileData);
+const updateProfileData = async () => {
+  try {
+    const { error } = await client
+      .from("users_production")
+      .update(
+        {
+          first_name: profileData.value.first_name,
+          last_name: profileData.value.last_name,
+          age: profileData.value.age,
+          phone_number: profileData.value.phone_number,
+        },
+        { returning: "minimal" }
+      )
+      .eq("id", id.value);
+    if (error) throw error;
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>
-
-<style></style>
