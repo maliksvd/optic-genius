@@ -1,4 +1,16 @@
 <script setup>
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
 // Dynamic route params
 const route = useRoute();
 const slug = ref(route.params.slug);
@@ -36,11 +48,24 @@ const isOpen = isLocationOpen();
         <div v-if="location">
           <div class="container mx-auto px-6 md:max-w-7xl my-8">
             <div class="mt-2 mb-6">
-              <img
-                :src="location.storefrontphoto"
-                alt="location image"
-                class="rounded-lg object-cover h-64 w-full"
-              />
+              <Carousel
+                :opts="{
+                  align: 'center',
+                  loop: true,
+                }"
+              >
+                <CarouselContent>
+                  <CarouselItem
+                    v-for="image in location.gallery"
+                    :key="image"
+                    class="md:basis-1/2 lg:basis-1/3"
+                  >
+                    <img :src="image" :alt="location.title" class="h-72" />
+                  </CarouselItem>
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             </div>
             <section class="flex flex-col md:flex-row">
               <div class="flex-1">
@@ -49,36 +74,22 @@ const isOpen = isLocationOpen();
                 >
                   {{ location.title }}
                 </h1>
-                <div id="walkinsSection">
+                <div id="walkinsSection" class="mb-8">
                   <div
                     v-if="location.walk_ins_welcome === true"
-                    class="flex items-center my-2"
+                    class="flex items-center my-2 text-green-400 text-sm"
                   >
-                    <Icon name="i-ph-calendar-x-duotone" class="h-6 w-6 mr-1" />
+                    <Icon name="ph:calendar" class="h-5 w-5 mr-1" />
                     Walk-ins Welcome
                   </div>
-                  <div v-else class="flex items-center my-2">
-                    <Icon
-                      name="i-ph-calendar-check-duotone"
-                      class="h-6 w-6 mr-2"
-                    />
+                  <div
+                    v-else
+                    class="flex items-center my-2 text-red-500 text-sm"
+                  >
+                    <Icon name="ph:calendar" class="h-5 w-5 mr-1" />
                     With Appointment Only
                   </div>
                 </div>
-                <div>
-                  <UBadge
-                    v-if="isOpen === true"
-                    color="green"
-                    variant="subtle"
-                    class="my-2"
-                  >
-                    Open
-                  </UBadge>
-                  <UBadge v-else color="red" variant="subtle" class="my-2">
-                    Closed
-                  </UBadge>
-                </div>
-
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                   <div>
                     <div v-if="location.emergency === true">
@@ -87,7 +98,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="aboutSection">
                   <h2
                     class="text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -98,7 +109,7 @@ const isOpen = isLocationOpen();
                     {{ location.descriptions.en }}
                   </p>
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="featuresSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -111,8 +122,8 @@ const isOpen = isLocationOpen();
                       class="flex items-center"
                     >
                       <Icon
-                        name="i-ph-credit-card-duotone"
-                        class="h-6 w-6 mr-1"
+                        name="ph:identification-badge"
+                        class="h-5 w-5 mr-1"
                       />
                       <div>
                         {{
@@ -126,7 +137,7 @@ const isOpen = isLocationOpen();
                       v-if="location.online_ordering_available"
                       class="flex items-center"
                     >
-                      <Icon name="i-ph-laptop-duotone" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:laptop" class="h-5 w-5 mr-1" />
                       <div>
                         {{
                           location.online_ordering_available === true
@@ -139,7 +150,7 @@ const isOpen = isLocationOpen();
                       v-if="location.children_eyewear_available"
                       class="flex items-center"
                     >
-                      <Icon name="i-lucide-baby" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:baby" class="h-5 w-5 mr-1" />
                       <div>
                         {{
                           location.children_eyewear_available === true
@@ -149,7 +160,7 @@ const isOpen = isLocationOpen();
                       </div>
                     </div>
                     <div v-if="location.emergency" class="flex items-center">
-                      <Icon name="i-ph-siren-duotone" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:siren" class="h-5 w-5 mr-1" />
                       <div>
                         {{
                           location.emergency === true
@@ -159,7 +170,7 @@ const isOpen = isLocationOpen();
                       </div>
                     </div>
                     <div v-if="location.contact_lens" class="flex items-center">
-                      <Icon name="i-ph-eye-duotone" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:eye" class="h-5 w-5 mr-1" />
                       <div>
                         {{
                           location.contact_lens === true
@@ -172,7 +183,7 @@ const isOpen = isLocationOpen();
                       v-if="location.telehealth_services"
                       class="flex items-center"
                     >
-                      <Icon name="i-ph-video-duotone" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:video" class="h-5 w-5 mr-1" />
                       <div>
                         {{
                           location.telehealth_services === true
@@ -185,7 +196,7 @@ const isOpen = isLocationOpen();
                       v-if="location.average_wait_time"
                       class="flex items-center"
                     >
-                      <Icon name="i-ph-clock-duotone" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:clock" class="h-5 w-5 mr-1" />
                       <div>
                         {{
                           location.average_wait_time
@@ -197,7 +208,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="geolocationSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -206,20 +217,17 @@ const isOpen = isLocationOpen();
                   </h2>
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                     <div class="flex items-center">
-                      <Icon name="i-ph-map-pin-duotone" class="h-6 w-6 mr-1" />
+                      <Icon name="ph:map-pin" class="h-5 w-5 mr-1" />
                       {{ location.street_address }}
                     </div>
                     <div class="flex items-center capitalize">
-                      <Icon
-                        name="i-ph-map-trifold-duotone"
-                        class="h-6 w-6 mr-1"
-                      />
+                      <Icon name="ph:map-trifold" class="h-5 w-5 mr-1" />
                       {{ location.city }} -
                       {{ location.province }}
                     </div>
                   </div>
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="othersSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -228,7 +236,7 @@ const isOpen = isLocationOpen();
                   </h2>
                   {{ location.specialization }}
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="hoursSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -247,7 +255,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="paymentsSections">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -260,15 +268,13 @@ const isOpen = isLocationOpen();
                       :key="index"
                     >
                       <div class="flex itens-center">
-                        <Icon
-                          :name="payment.icon"
-                          class="h-6 w-6 mr-1"/>
+                        <Icon :name="payment.icon" class="h-6 w-6 mr-1" />
                         <p>{{ payment.label }}</p>
-                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <UDivider class="my-8" />
+                <Separator class="my-8" />
                 <div id="productsSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -278,24 +284,33 @@ const isOpen = isLocationOpen();
                 </div>
               </div>
               <div class="w-96">
-                <UCard>
-                  <div>
-                    <div
-                      class="flex flex-col md:flex-row items-center space-x-2 w-full"
-                    >
-                      <UButton class="bg-black rounded-full">
-                        <Icon name="i-ph-phone-duotone" class="h-6 w-6 mr-1" />
-                        <a :href="'tel:' + location.phone">
-                          {{ location.phone }}
-                        </a>
-                      </UButton>
-                      <UButton class="bg-black rounded-full">
-                        <Icon name="i-ph-laptop-duotone" class="h-6 w-6 mr-1" />
+                <Card>
+                  <CardHeader>
+                    <h3 class="text-xl font-bold">Book an appointment</h3>
+                    <p class="text-sm">
+                      Book an appointment with this location. You can also call
+                      them directly.
+                    </p>
+                  </CardHeader>
+                  <CardContent>
+                    <Button class="w-full">
+                      <Icon name="ph:calendar" class="h-5 w-5 mr-1" />
+                      Ask for an appointment
+                    </Button>
+                  </CardContent>
+                  <CardFooter>
+                    <div class="flex space-x-4">
+                      <Button variant="outline" class="w-full">
+                        <Icon name="ph:phone" class="h-5 w-5 mr-1" />
+                        <a :href="'tel:' + location.phone"> Phone Number </a>
+                      </Button>
+                      <Button variant="outline" class="w-full">
+                        <Icon name="ph:laptop" class="h-5 w-5 mr-1" />
                         <a :href="'https://' + location.website"> Website </a>
-                      </UButton>
+                      </Button>
                     </div>
-                  </div>
-                </UCard>
+                  </CardFooter>
+                </Card>
               </div>
             </section>
           </div>
