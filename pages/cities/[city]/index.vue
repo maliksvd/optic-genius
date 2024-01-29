@@ -12,14 +12,42 @@ import {
 
 const route = useRoute();
 
-// Dynamic route params
+/**
+ * Get the current locale path*
+ * @returns {string}
+ * @property {string} locale
+ * @property {string} locales
+ * @property {string} localePath
+ */
+const localePath = useLocalePath();
+const { locale, locales } = useI18n();
+
+/**
+ * Define the city from the route params
+ * @returns {string}
+ */
 const { city } = route.params;
 
-// Query params
+/**
+ * Define the query params from the route
+ * @returns {string}
+ * @property {string} service
+ * @property {string} borough
+ * @property {string} occupation
+ */
 const serviceParamURL = route.query.service;
 const boroughParamURL = route.query.borough;
 const occupationParamURL = route.query.occupation;
 
+/**
+ * Register reactive variables
+ * @returns {string}
+ * @property {string} selectedService
+ * @property {string} selectedOccupation
+ * @property {string} selectedBorough
+ * @property {boolean} walkIns
+ * @property {boolean} hasEmergency
+ */
 const selectedService = ref("");
 const selectedOccupation = ref("");
 const selectedBorough = ref("");
@@ -94,10 +122,7 @@ const filteredLocations = computed(() => {
         >
           <Select v-model="selectedService">
             <SelectTrigger>
-              <SelectValue
-                
-                placeholder="Services available"
-              />
+              <SelectValue :placeholder="$t('serviceType')" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -112,10 +137,7 @@ const filteredLocations = computed(() => {
           </Select>
           <Select v-model="selectedOccupation">
             <SelectTrigger>
-              <SelectValue
-                v-model="selectedOccupation"
-                placeholder="Occupation Type"
-              />
+              <SelectValue :placeholder="$t('occupationType')" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -130,10 +152,7 @@ const filteredLocations = computed(() => {
           </Select>
           <Select v-model="selectedBorough">
             <SelectTrigger>
-              <SelectValue
-                v-model="selectedBorough"
-                placeholder="Borough"
-              />
+              <SelectValue :placeholder="$t('borough')" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -152,7 +171,7 @@ const filteredLocations = computed(() => {
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div v-for="location in filteredLocations" :key="location.slug">
             <NuxtLink
-              :to="`/cities/${city}/${location.slug}`"
+              :to="localePath(`/cities/${city}/${location.slug}`)"
               :key="location.slug"
             >
               <img
@@ -162,16 +181,16 @@ const filteredLocations = computed(() => {
               />
               <div>
                 <div class="text-sm font-semibold">
-                {{ location.title }}
-              </div>
-              <div class="text-xs">
-                <span
-                  v-if="location.walk_ins_welcome == 1"
-                  class="text-green-500"
-                  >Walk-ins welcome</span
-                >
-                <span v-else class="text-red-500">Walk-ins not welcome</span>
-              </div>
+                  {{ location.title }}
+                </div>
+                <div class="text-xs">
+                  <span
+                    v-if="location.walk_ins_welcome == 1"
+                    class="text-green-500"
+                    >Walk-ins welcome</span
+                  >
+                  <span v-else class="text-red-500">Walk-ins not welcome</span>
+                </div>
               </div>
             </NuxtLink>
           </div>

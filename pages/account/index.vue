@@ -49,6 +49,20 @@
         <Button variant="primary" @click="updateProfileData">Update</Button>
         <Button variant="destructive" @click="signOut">Sign out</Button>
       </div>
+
+      <div class="my-12">
+        <h2 class="text-2xl font-bold tracking-tight">Language</h2>
+        <p class="text-black">Select your preferred language for the site.</p>
+        <form>
+          <select v-model="locale">
+            <option value="en">en</option>
+            <option value="fr">fr</option>
+            <option value="es">es</option>
+          </select>
+          <p>{{ $t("welcome") }}</p>
+          <p>{{ $t("yes") }}</p>
+        </form>
+      </div>
     </main>
   </div>
 </template>
@@ -59,6 +73,7 @@ import { Input } from "@/components/ui/input";
 
 const client = useSupabaseClient();
 const user = useSupabaseUser();
+const { locale } = useI18n();
 
 const signOut = async () => {
   const { error } = await supabase.auth.signOut();

@@ -1,0 +1,30 @@
+{
+  "hello": "Bonjour",
+  "welcome": "Bienvenue",
+  "goodbye": "Au revoir",
+  "thank_you": "Merci",
+  "yes": "Oui",
+  "no": "Non",
+
+  "findService": "Trouver un service",
+
+  "base": {
+    "city": "Ville",
+    "cities": "Villes",
+    "country": "Pays",
+    "map": "Carte",
+    "education": "Éducation",
+    "contact": "Contact",
+    "about": "À propos"
+  },
+
+  "occupationType": "Type de profession",
+  "occupationTypes": "Types de professions",
+  "occupation": "Profession",
+  "occupations": "Professions",
+  "borough": "Arrondissement",
+  "boroughs": "Arrondissements",
+  "service": "Service",
+  "services": "Services",
+  "serviceType": "Type de service"
+}

@@ -1,0 +1,30 @@
+{
+  "hello": "Hola",
+  "welcome": "Bienvenido",
+  "goodbye": "Adiós",
+  "thank_you": "Gracias",
+  "yes": "Sí",
+  "no": "No",
+
+  "findService": "Encontrar Servicio",
+
+  "base": {
+    "city": "Ciudad",
+    "cities": "Ciudades",
+    "country": "País",
+    "map": "Mapa",
+    "education": "Educación",
+    "contact": "Contacto",
+    "about": "Acerca de"
+  },
+
+  "occupationType": "Tipo de ocupación",
+  "occupationTypes": "Tipos de ocupación",
+  "occupation": "Ocupación",
+  "occupations": "Ocupaciones",
+  "borough": "Distrito",
+  "boroughs": "Distritos",
+  "service": "Servicio",
+  "services": "Servicios",
+  "serviceType": "Tipo de servicio"
+}
