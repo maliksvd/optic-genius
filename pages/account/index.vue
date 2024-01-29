@@ -22,7 +22,7 @@
             type="text"
             placeholder="Phone number"
             class="mt-4"
-            v-model="profileData.phone_number"
+            v-model="profileData.phone"
           />
         </div>
         <Input
@@ -103,7 +103,7 @@ const updateProfileData = async () => {
           first_name: profileData.value.first_name,
           last_name: profileData.value.last_name,
           age: profileData.value.age,
-          phone_number: profileData.value.phone_number,
+          phone: profileData.value.phone,
         },
         { returning: "minimal" }
       )
