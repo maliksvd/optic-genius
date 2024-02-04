@@ -15,7 +15,10 @@
     "map": "Mapa",
     "education": "Educación",
     "contact": "Contacto",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "myAccount": "Mi cuenta"
   },
 
   "occupationType": "Tipo de ocupación",

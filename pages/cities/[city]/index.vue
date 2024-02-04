@@ -1,15 +1,4 @@
 <script setup>
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 const route = useRoute();
 
 /**
@@ -79,6 +68,11 @@ watchEffect(() => {
 // Get the services and boroughs for the filter from the local api
 const { data: getServices } = await useFetch("/api/services/");
 const { data: getBoroughs } = await useFetch("/api/boroughs?city=" + city);
+const getOccupations = [
+  { label: "Optometrist", value: "optometrist" },
+  { label: "Optician", value: "optician" },
+  { label: "Ophthalmologist", value: "ophthalmologist" },
+];
 
 const formatBorough = ref(getBoroughs.value.boroughs);
 
@@ -90,9 +84,10 @@ const filteredLocations = computed(() => {
         location.services_offered.includes(selectedService.value);
       const occupationMatch =
         !selectedOccupation.value ||
-        location.occupation_type.some(
-          (occupation) => occupation.type === selectedOccupation.value
-        );
+        (Array.isArray(location.occupation_type) &&
+          location.occupation_type.some(
+            (occupation) => occupation.type === selectedOccupation.value
+          ));
       const boroughMatch =
         !selectedBorough.value || location.borough === selectedBorough.value;
       const walkInsMatch = !walkIns.value || location.walk_ins_welcome == 1;
@@ -120,51 +115,30 @@ const filteredLocations = computed(() => {
         <div
           class="flex flex-col md:flex-row space-x-0 space-y-4 md:space-x-4 md:space-y-0 w-full md:w-1/2"
         >
-          <Select v-model="selectedService">
-            <SelectTrigger>
-              <SelectValue :placeholder="$t('serviceType')" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Services</SelectLabel>
-                <template v-for="service in getServices">
-                  <SelectItem :value="service.value">
-                    {{ service.label }}
-                  </SelectItem>
-                </template>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select v-model="selectedOccupation">
-            <SelectTrigger>
-              <SelectValue :placeholder="$t('occupationType')" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Occupation Type</SelectLabel>
-                <SelectItem value="optician"> Optician </SelectItem>
-                <SelectItem value="optometrist"> Optometrist </SelectItem>
-                <SelectItem value="ophthalmologist">
-                  Ophthalmologist
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select v-model="selectedBorough">
-            <SelectTrigger>
-              <SelectValue :placeholder="$t('borough')" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Borough</SelectLabel>
-                <template v-for="borough in formatBorough">
-                  <SelectItem :value="borough.value" v-model="selectedBorough">
-                    {{ borough.name }}
-                  </SelectItem>
-                </template>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <USelect
+            v-model="selectedService"
+            :options="getServices"
+            icon="i-ph-hand-heart"
+            size="lg"
+            placeholder="Select a service"
+            class="w-full"
+          />
+          <USelect
+            v-model="selectedOccupation"
+            :options="getOccupations"
+            icon="i-ph-certificate"
+            size="lg"
+            placeholder="Select an occupation"
+            class="w-full"
+          />
+          <USelect
+            v-model="selectedBorough"
+            :options="formatBorough"
+            size="lg"
+            icon="i-ph-map-pin"
+            placeholder="Select a borough"
+            class="w-full"
+          />
         </div>
       </div>
       <div>

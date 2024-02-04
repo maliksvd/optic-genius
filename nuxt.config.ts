@@ -1,25 +1,20 @@
+import { _light } from "#tailwind-config/theme/fontWeight";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    "@nuxtjs/tailwindcss",
-    "shadcn-nuxt",
+    "@nuxt/ui",
     "@nuxtjs/i18n",
     "nuxt-icon",
+    "@pinia/nuxt",
     "@nuxtjs/supabase",
   ],
 
-  shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
-    prefix: "",
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: "./components/ui",
+  ui: {
+    global: true,
+    icons: ["ph", "simple-icons", "logos"],
   },
 
   colorMode: {

@@ -15,7 +15,10 @@
     "map": "Carte",
     "education": "Éducation",
     "contact": "Contact",
-    "about": "À propos"
+    "about": "À propos",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "myAccount": "Mon compte"
   },
 
   "occupationType": "Type de profession",

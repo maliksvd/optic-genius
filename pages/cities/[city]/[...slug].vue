@@ -1,16 +1,4 @@
 <script setup>
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-
 // Dynamic route params
 const route = useRoute();
 const slug = ref(route.params.slug);
@@ -24,6 +12,8 @@ const apiUrl = ref(
 );
 
 const { pending, data: location, error } = useFetch(apiUrl.value);
+
+const items = ref(location.value ? location.value.gallery : []);
 
 const isOpen = isLocationOpen();
 </script>
@@ -48,24 +38,15 @@ const isOpen = isLocationOpen();
         <div v-if="location">
           <div class="container mx-auto px-6 md:max-w-7xl my-8">
             <div class="mt-2 mb-6">
-              <Carousel
-                :opts="{
-                  align: 'center',
-                  loop: true,
-                }"
+              <UCarousel
+                v-slot="{ item }"
+                :items="items"
+                :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/3 mr-2' }"
+                class="rounded-lg overflow-hidden"
+                arrows
               >
-                <CarouselContent>
-                  <CarouselItem
-                    v-for="image in location.gallery"
-                    :key="image"
-                    class="md:basis-1/2 lg:basis-1/3"
-                  >
-                    <img :src="image" :alt="location.title" class="h-72" />
-                  </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
+                <img :src="item" class="w-full" />
+              </UCarousel>
             </div>
             <section class="flex flex-col md:flex-row">
               <div class="flex-1">
@@ -98,7 +79,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="aboutSection">
                   <h2
                     class="text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -109,7 +90,7 @@ const isOpen = isLocationOpen();
                     {{ location.descriptions.en }}
                   </p>
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="featuresSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -208,7 +189,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="geolocationSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -227,7 +208,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="othersSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -236,7 +217,7 @@ const isOpen = isLocationOpen();
                   </h2>
                   {{ location.specialization }}
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="hoursSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -255,7 +236,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="paymentsSections">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -274,7 +255,7 @@ const isOpen = isLocationOpen();
                     </div>
                   </div>
                 </div>
-                <Separator class="my-8" />
+                <UDivider class="my-8" />
                 <div id="productsSection">
                   <h2
                     class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white"
@@ -284,33 +265,35 @@ const isOpen = isLocationOpen();
                 </div>
               </div>
               <div class="w-96">
-                <Card>
-                  <CardHeader>
+                <UCard>
+                  <template #header>
                     <h3 class="text-xl font-bold">Book an appointment</h3>
                     <p class="text-sm">
                       Book an appointment with this location. You can also call
                       them directly.
                     </p>
-                  </CardHeader>
-                  <CardContent>
-                    <Button class="w-full">
-                      <Icon name="ph:calendar" class="h-5 w-5 mr-1" />
-                      Ask for an appointment
-                    </Button>
-                  </CardContent>
-                  <CardFooter>
-                    <div class="flex space-x-4">
-                      <Button variant="outline" class="w-full">
+                  </template>
+                  <UButton
+                    color="black"
+                    size="lg"
+                    class="w-full"
+                    icon="i-ph-calendar"
+                  >
+                    Ask for an appointment
+                  </UButton>
+                  <template #footer>
+                    <div class="flex space-x-2 w-full">
+                      <UButton color="white" variant="solid">
                         <Icon name="ph:phone" class="h-5 w-5 mr-1" />
                         <a :href="'tel:' + location.phone"> Phone Number </a>
-                      </Button>
-                      <Button variant="outline" class="w-full">
+                      </UButton>
+                      <UButton color="white" variant="solid">
                         <Icon name="ph:laptop" class="h-5 w-5 mr-1" />
                         <a :href="'https://' + location.website"> Website </a>
-                      </Button>
+                      </UButton>
                     </div>
-                  </CardFooter>
-                </Card>
+                  </template>
+                </UCard>
               </div>
             </section>
           </div>
@@ -326,7 +309,7 @@ const isOpen = isLocationOpen();
             </p>
             <NuxtLink to="/">
               <UButton
-                color="primary"
+                color="black"
                 variant="solid"
                 class="mt-4 rounded-full bg-black"
               >

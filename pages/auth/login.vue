@@ -1,49 +1,6 @@
-<template>
-  <div>
-    <Header />
-    <form
-      class="flex-col items-center space-y-4 md:max-w-xs mx-auto h-screen mt-48 px-6"
-      @submit.prevent="handleLogin"
-    >
-      <div>
-        <h2 class="text-lg font-semibold">Sign in</h2>
-        <p class="mb-6">via magic link with your email below.</p>
-        <div class="mb-8">
-          <Input type="email" placeholder="Your email" v-model="email" />
-        </div>
-        <Button
-          type="submit"
-          :value="loading ? 'Loading' : 'Send magic link'"
-          :disabled="loading"
-          :loading="loading"
-        >
-          <Icon name="i-ph:magic-wand-fill" class="mr-2" />
-          Send magic link
-        </Button>
-      </div>
-    </form>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-
-useHead({
-  title: "Sign in - Optic Genius",
-  meta: [
-    {
-      name: "description",
-      content: "Sign in to your account",
-    },
-  ],
-});
-
-definePageMeta({
-  middleware: "auth-logged",
-});
-
-const supabase = useSupabaseClient();
+<script setup lang="ts">
+const client = useSupabaseClient();
+const user = useSupabaseUser();
 
 const loading = ref(false);
 const email = ref("");
@@ -51,7 +8,7 @@ const email = ref("");
 const handleLogin = async () => {
   try {
     loading.value = true;
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error } = await client.auth.signInWithOtp({
       email: email.value,
     });
     if (error) throw error;
@@ -63,3 +20,35 @@ const handleLogin = async () => {
   }
 };
 </script>
+<template>
+  <div>
+    <UContainer class="flex justify-center items-center h-screen max-w-sm">
+      <div class="w-full flex flex-col gap-y-4">
+        <h1 class="text-center font-bold">Welcome back!</h1>
+        <p class="text-center text-sm">Please sign in to your account</p>
+        <UCard :ui="{ body: { base: 'grid grid-cols-1' } }">
+          <form @submit.prevent="handleLogin" class="space-y-4">
+            <UInput
+              v-model="email"
+              type="email"
+              size="lg"
+              placeholder="Enter your email"
+              icon="i-ph-envelope"
+            />
+            <UButton
+              label="Send a magic link"
+              icon="i-ph-magic-wand"
+              size="lg"
+              color="black"
+              block
+              type="submit"
+              :value="loading ? 'Loading' : 'Send magic link'"
+              :disabled="loading"
+              :loading="loading"
+            />
+          </form>
+        </UCard>
+      </div>
+    </UContainer>
+  </div>
+</template>

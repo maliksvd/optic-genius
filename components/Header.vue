@@ -1,19 +1,24 @@
-<script setup lang="ts">
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
+<script setup>
+/**
+ * Get locale and locales from i18n module
+ * @see https://i18n.nuxtjs.org/
+ */
 const { locale, locales } = useI18n();
+
+const getLocales = () => {
+  return locales.value.map((locale) => ({
+    label: locale.name,
+    value: locale.code,
+  }));
+};
 const localePath = useLocalePath();
 
+/**
+ * Get user from supabase module
+ * @returns {User}
+ * @see https://supabase.nuxtjs.org/authentication
+ *
+ */
 const user = useSupabaseUser();
 </script>
 
@@ -38,77 +43,49 @@ const user = useSupabaseUser();
               <NuxtLink :to="localePath('/')">
                 <h1 class="font-semibold text-lg mr-2">Optic Genius</h1>
               </NuxtLink>
-              <Badge>Alpha</Badge>
+              <UBadge color="primary" variant="subtle">Alpha</UBadge>
             </div>
             <div class="hidden md:block">
               <ul class="list-none flex">
                 <li>
-                  <Button variant="link">
+                  <UButton color="black" variant="link">
                     <NuxtLink :to="localePath('/')">
                       {{ $t("findService") }}
                     </NuxtLink>
-                  </Button>
+                  </UButton>
                 </li>
                 <li>
-                  <Button variant="link">
+                  <UButton color="black" variant="link">
                     <NuxtLink :to="localePath('/cities')">
                       {{ $t("base.cities") }}
                     </NuxtLink>
-                  </Button>
+                  </UButton>
                 </li>
                 <li>
-                  <Button variant="link">
+                  <UButton color="black" variant="link">
                     <NuxtLink :to="localePath('/')">
                       {{ $t("base.about") }}
                     </NuxtLink>
-                  </Button>
+                  </UButton>
                 </li>
                 <li>
-                  <Button variant="link">
+                  <UButton color="black" variant="link">
                     <NuxtLink :to="localePath('/')">
                       {{ $t("base.contact") }}
                     </NuxtLink>
-                  </Button>
+                  </UButton>
                 </li>
               </ul>
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <form>
-              <Select v-model="locale">
-                <SelectTrigger>
-                  <SelectValue class="flex items-center">
-                    Language
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup v-for="locale in locales" :key="locale.code">
-                    <SelectItem :value="locale.code">
-                      {{ locale.name }}
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </form>
-            <div v-if="user">
-              <Button variant="link">
-                <NuxtLink
-                  :to="localePath('/account')"
-                  class="flex items-center"
-                >
-                  My Account
-                  <Icon name="ph:user-circle-gear" class="w-6 h-6 ml-2" />
-                </NuxtLink>
-              </Button>
-            </div>
-            <div v-else>
-              <Button>
-                <NuxtLink to="/auth/login">
-                  <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
-                  Login / Register
-                </NuxtLink>
-              </Button>
-            </div>
+            <ClientOnly>
+              <NuxtLink :to="localePath('/account')">
+                <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
+                <!-- Dynamically update text based on client-side state -->
+                {{ !user ? $t("base.signIn") : $t("base.myAccount") }}
+              </NuxtLink>
+            </ClientOnly>
           </div>
         </div>
       </div>

@@ -1,13 +1,4 @@
 <script lang="ts" setup>
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
 /**
  * Get the current locale path
  *
@@ -26,6 +17,10 @@ const localePath = useLocalePath();
  *
  */
 const { data, pending, error, refresh } = await useFetch("/api/cities");
+
+useHead({
+  title: "All cities - Optic Genius",
+});
 </script>
 
 <template>
@@ -33,11 +28,16 @@ const { data, pending, error, refresh } = await useFetch("/api/cities");
     <Header />
     <main class="container mx-auto px-6 md:max-w-7xl mt-8">
       <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-        <Card v-for="city in data" :key="city.id" class="">
+        <UCard v-for="city in data" :key="city.id" class="">
           <NuxtLink :to="localePath('/cities/' + city.value)">{{
             city.label
           }}</NuxtLink>
-        </Card>
+          <template #footer>
+            <NuxtLink :to="localePath('/cities/' + city.value)">
+              View
+            </NuxtLink>
+          </template>
+        </UCard>
       </div>
     </main>
   </div>

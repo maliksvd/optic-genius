@@ -15,7 +15,10 @@
     "map": "Map",
     "education": "Education",
     "contact": "Contact",
-    "about": "About"
+    "about": "About",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "myAccount": "My account"
   },
 
   "occupationType": "Occupation type",
@@ -26,5 +29,9 @@
   "boroughs": "Boroughs",
   "service": "Service",
   "services": "Services",
-  "serviceType": "Service type"
+  "serviceType": "Service type",
+
+  "seo": {
+    "description": "Find an eye-wear professional near you."
+  }
 }
