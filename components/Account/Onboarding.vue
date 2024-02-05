@@ -5,6 +5,13 @@ const client = useSupabaseClient();
 const user = useSupabaseUser();
 const profileData = useProfile();
 
+/**
+ * Define the locale and the $t function
+ * @type {import("vue-i18n").Locale}
+ * @type {import("vue-i18n").Translate}
+ */
+const { locale } = useI18n();
+
 const state = reactive({
   first_name: undefined as string | undefined,
   last_name: undefined as string | undefined,
@@ -17,6 +24,8 @@ const userTypeItems = [
   { label: "Optometrist", value: "optometrist" },
   { label: "Ophthalmologist", value: "ophthalmologist" },
 ];
+
+const id = ref<string | undefined>(user.value?.id);
 
 async function onSubmit(event: FormSubmitEvent<any>) {
   // Do something with data
@@ -41,17 +50,13 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     navigateTo("/account");
   }
 }
-
-definePageMeta({
-  middleware: "completed",
-});
 </script>
 
 <template>
-  <div class="flex flex-col justify-center items-center h-screen">
-    <UIcon name="i-ph-presentation" class="h-16 w-16 mb-6" />
+  <div class="flex flex-col justify-center items-center mt-24 px-8">
+    <UIcon name="i-ph-flag-checkered" class="h-16 w-16 mb-6" />
     <h1 class="text-xl md:text-2xl font-semibold">Onboarding</h1>
-    <p class="mb-6 text-base md:text-lg">
+    <p class="mb-6 text-base md:text-lg text-center mt-4">
       To continue, you need to fill the fields below to complete your profile.
     </p>
     <UForm :state="state" class="space-y-4" @submit="onSubmit">
@@ -71,11 +76,17 @@ definePageMeta({
         type="submit"
         color="black"
         size="lg"
+        block
         icon="i-ph-paper-plane-tilt"
       >
-        Submit
+        Finish your profile
       </UButton>
     </UForm>
+    <div class="mt-4">
+      <UButton color="black" variant="ghost" size="sm" @click="signOut">
+        {{ $t("base.signOut") }}
+      </UButton>
+    </div>
   </div>
 </template>
 

@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 
   ui: {
     global: true,
-    icons: ["ph", "simple-icons", "logos"],
+    icons: ["ph", "simple-icons", "logos", "line-md"],
   },
 
   colorMode: {
