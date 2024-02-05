@@ -9,14 +9,6 @@ const client = useSupabaseClient();
 const user = useSupabaseUser();
 
 /**
- * Define the page meta
- * Middleware: auth
- */
-definePageMeta({
-  middleware: "auth",
-});
-
-/**
  * Define the locale and the $t function
  * @type {import("vue-i18n").Locale}
  * @type {import("vue-i18n").Translate}
