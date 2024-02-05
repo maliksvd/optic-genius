@@ -7,6 +7,7 @@
  */
 const client = useSupabaseClient();
 const user = useSupabaseUser();
+const profileData = await useProfile();
 
 /**
  * Define the locale and the $t function
@@ -15,13 +16,18 @@ const user = useSupabaseUser();
  */
 const { locale } = useI18n();
 
-const id = computed(() => user.value.id);
+/**
+ * Redirect to the login page if the user is not logged in
+ */
+definePageMeta({
+  middleware: "onboarding",
+});
 
 /**
  * Fetch the user profile data
  * @type {import("@supabase/supabase-js").PostgrestSingleResponse<any>}
  * @returns {Object}
- */
+ 
 const { data: profileData } = await useAsyncData(
   "users_production",
   async () => {
@@ -33,13 +39,7 @@ const { data: profileData } = await useAsyncData(
     return data;
   }
 );
-
-/**
- * Redirect to the login page if the user is not logged in
- */
-definePageMeta({
-  middleware: "onboarding",
-});
+*/
 
 /**
  * Define the signOut function
