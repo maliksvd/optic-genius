@@ -56,6 +56,7 @@ definePageMeta({
 const signOut = async () => {
   const { error } = await client.auth.signOut();
   if (error) console.log(error);
+  else return navigateTo("/");
 };
 </script>
 
@@ -77,8 +78,10 @@ const signOut = async () => {
       />
     </div>
     <main class="container mx-auto px-6 md:max-w-7xl mt-12">
-      <div class="grid grid-cols-3 space-x-8">
-        <UCard class="mb-12">
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 space-y-8 space-x-0 md:space-x-8 md:space-y-0"
+      >
+        <UCard>
           <template #header>
             <h3 class="text-xl font-bold tracking-tight">Profile</h3>
           </template>
@@ -127,7 +130,7 @@ const signOut = async () => {
           </form>
         </UCard>
       </div>
-      <div class="flex flex-col w-48">
+      <div class="flex flex-col w-48 mb-12 mt-8">
         <p class="text-sm">You want to leave us? 😢</p>
         <UButton
           label="Sign out"

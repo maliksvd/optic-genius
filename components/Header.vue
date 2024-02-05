@@ -79,13 +79,11 @@ const user = useSupabaseUser();
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <ClientOnly>
-              <NuxtLink :to="localePath('/account')">
-                <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
-                <!-- Dynamically update text based on client-side state -->
-                {{ !user ? $t("base.signIn") : $t("base.myAccount") }}
-              </NuxtLink>
-            </ClientOnly>
+            <NuxtLink :to="user ? localePath('/account') : '/auth/login'">
+              <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
+              <!-- Dynamically update text based on client-side state -->
+              {{ !user ? $t("base.signIn") : $t("base.myAccount") }}
+            </NuxtLink>
           </div>
         </div>
       </div>
