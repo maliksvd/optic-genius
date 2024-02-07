@@ -9,14 +9,20 @@ const client = useSupabaseClient();
 const user = useSupabaseUser();
 const profileData = await useProfile();
 
-console.log(profileData);
-
 /**
  * Define the locale and the $t function
  * @type {import("vue-i18n").Locale}
  * @type {import("vue-i18n").Translate}
  */
 const { locale } = useI18n();
+
+useHead({
+  title: "Account - Optic Genius",
+  ogTitle: "Account - Optic Genius",
+  ogDescription: "Manage your account settings and set e-mail preferences.",
+  twitterDescription:
+    "Manage your account settings and set e-mail preferences.",
+});
 
 /**
  * Define the signOut function
@@ -31,19 +37,18 @@ const signOut = async () => {
 
 <template>
   <div>
-    <Header />
     <div
       v-if="
         profileData.data.first_name !== null &&
         profileData.data.first_name !== undefined
       "
     >
-      <div class="border-b py-16 md:py-24 px-8 md:px-24">
+      <div class="md:py-24">
         <h2 class="text-2xl font-bold tracking-tight">
-          Hello, {{ profileData.first_name }}
+          {{ $t("account.hello") }}, {{ profileData.first_name }}
         </h2>
         <p class="text-black mt-1.5 mb-2">
-          Manage your account settings and set e-mail preferences.
+          {{ $t("account.accountHeadingMessage") }}
         </p>
         <UBadge
           :label="profileData.data.user_type"
@@ -52,43 +57,57 @@ const signOut = async () => {
           variant="subtle"
         />
       </div>
-      <main class="container mx-auto px-6 md:max-w-7xl mt-12">
+      <main>
         <div
           class="grid grid-cols-1 md:grid-cols-3 space-y-8 space-x-0 md:space-x-8 md:space-y-0"
         >
           <UCard>
             <template #header>
-              <h3 class="text-xl font-bold tracking-tight">Profile</h3>
+              <h3 class="text-xl font-bold tracking-tight">
+                {{ $t("account.profile") }}
+              </h3>
             </template>
 
             <div class="grid grid-cols-2">
               <div>
-                <p class="text-black font-bold">First name</p>
+                <p class="text-black font-bold">
+                  {{ $t("account.user.firstName") }}
+                </p>
                 <p class="text-black">{{ profileData.data.first_name }}</p>
               </div>
               <div>
-                <p class="text-black font-bold">Last name</p>
+                <p class="text-black font-bold">
+                  {{ $t("account.user.lastName") }}
+                </p>
                 <p class="text-black">{{ profileData.data.last_name }}</p>
               </div>
               <div>
-                <p class="text-black font-bold">Email</p>
+                <p class="text-black font-bold">
+                  {{ $t("account.user.email") }}
+                </p>
                 <p class="text-black">{{ user.email }}</p>
               </div>
             </div>
           </UCard>
           <UCard class="mb-12">
             <template #header>
-              <h3 class="text-xl font-bold tracking-tight">Preferences</h3>
+              <h3 class="text-xl font-bold tracking-tight">
+                {{ $t("account.preferences") }}
+              </h3>
             </template>
             <div class="grid grid-cols-2">
               <div>
-                <p class="text-black font-bold">City</p>
+                <p class="text-black font-bold">
+                  {{ $t("base.city") }}
+                </p>
                 <p class="text-black">
                   {{ profileData.city ? profileData.city : "Not set" }}
                 </p>
               </div>
               <div>
-                <p class="text-black font-bold">Borough</p>
+                <p class="text-black font-bold">
+                  {{ $t("base.borough") }}
+                </p>
                 <p class="text-black">
                   {{
                     profileData.data.borough
@@ -101,7 +120,9 @@ const signOut = async () => {
           </UCard>
           <UCard class="mb-12">
             <template #header>
-              <h3 class="text-xl font-bold tracking-tight">Language</h3>
+              <h3 class="text-xl font-bold tracking-tight">
+                {{ $t("account.language") }}
+              </h3>
             </template>
 
             <form>

@@ -109,65 +109,63 @@ const filteredLocations = computed(() => {
 
 <template>
   <div>
-    <Header />
-    <main class="container mx-auto px-6 md:max-w-7xl mt-8">
-      <div class="my-8">
-        <div
-          class="flex flex-col md:flex-row space-x-0 space-y-4 md:space-x-4 md:space-y-0 w-full md:w-1/2"
-        >
-          <USelect
-            v-model="selectedService"
-            :options="getServices"
-            icon="i-ph-hand-heart"
-            size="lg"
-            placeholder="Select a service"
-            class="w-full"
-          />
-          <USelect
-            v-model="selectedOccupation"
-            :options="getOccupations"
-            icon="i-ph-certificate"
-            size="lg"
-            placeholder="Select an occupation"
-            class="w-full"
-          />
-          <USelect
-            v-model="selectedBorough"
-            :options="formatBorough"
-            size="lg"
-            icon="i-ph-map-pin"
-            placeholder="Select a borough"
-            class="w-full"
-          />
-        </div>
+    <UCard class="my-6">
+      <div class="grid grid-cols-5 gap-8">
+        <USelect
+          v-model="selectedService"
+          :options="getServices"
+          icon="i-ph-hand-heart"
+          size="lg"
+          :ui="{ rounded: 'rounded-full' }"
+          placeholder="Select a service"
+          class="w-full"
+        />
+        <USelect
+          v-model="selectedOccupation"
+          :options="getOccupations"
+          icon="i-ph-certificate"
+          size="lg"
+          :ui="{ rounded: 'rounded-full' }"
+          placeholder="Select an occupation"
+          class="w-full"
+        />
+        <USelect
+          v-model="selectedBorough"
+          :options="formatBorough"
+          size="lg"
+          :ui="{ rounded: 'rounded-full' }"
+          icon="i-ph-map-pin"
+          placeholder="Select a borough"
+          class="w-full"
+        />
       </div>
-      <div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div v-for="location in filteredLocations" :key="location.slug">
-            <NuxtLink
-              :to="localePath(`/cities/${city}/${location.slug}`)"
-              :key="location.slug"
-            >
-              <img
-                :src="location.storefrontphoto"
-                :alt="location.title"
-                class="w-full h-56 object-cover mb-2 rounded-md"
-              />
-              <div>
-                <div class="text-sm font-semibold">
-                  {{ location.title }}
-                </div>
-                <div class="text-xs">
-                  <span
-                    v-if="location.walk_ins_welcome == 1"
-                    class="text-green-500"
-                    >Walk-ins welcome</span
-                  >
-                  <span v-else class="text-red-500">Walk-ins not welcome</span>
-                </div>
+    </UCard>
+    <main>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div v-for="location in filteredLocations" :key="location.slug">
+          <NuxtLink
+            :to="localePath(`/cities/${city}/${location.slug}`)"
+            :key="location.slug"
+          >
+            <img
+              :src="location.storefrontphoto"
+              :alt="location.title"
+              class="w-full h-56 object-cover mb-2 rounded-md"
+            />
+            <div>
+              <div class="text-sm font-semibold">
+                {{ location.title }}
               </div>
-            </NuxtLink>
-          </div>
+              <div class="text-xs">
+                <span
+                  v-if="location.walk_ins_welcome == 1"
+                  class="text-green-500"
+                  >Walk-ins welcome</span
+                >
+                <span v-else class="text-red-500">Walk-ins not welcome</span>
+              </div>
+            </div>
+          </NuxtLink>
         </div>
       </div>
     </main>

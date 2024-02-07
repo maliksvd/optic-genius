@@ -21,6 +21,20 @@
     "myAccount": "My account"
   },
 
+  "account": {
+    "hello": "Hello",
+    "accountHeadingMessage": "Manage your account settings and set e-mail preferences.",
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "language": "Language",
+    "user": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email"
+    },
+    "signOutMessage": "You want to sign out?"
+  },
+
   "occupationType": "Occupation type",
   "occupationTypes": "Occupation types",
   "occupation": "Occupation",

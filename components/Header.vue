@@ -24,13 +24,15 @@ const user = useSupabaseUser();
 
 <template>
   <div>
-    <div class="border-b flex justify-between items-center h-16">
-      <div class="container mx-auto px-6 md:max-w-7xl">
+    <div
+      class="border-b flex justify-between items-center h-16 backdrop-blur-lg bg-white"
+    >
+      <div class="container mx-auto px-6 md:max-w-6xl">
         <div class="flex items-center space-x-8 justify-between">
           <div id="left-side" class="flex items-center space-x-4">
             <div class="inline-flex items-center justify-center p-0 rounded-md">
               <svg
-                class="h-7 lg:h-8 w-auto mr-2"
+                class="h-7 lg:h-6 w-auto mr-2"
                 viewBox="0 0 65 65"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,28 +50,28 @@ const user = useSupabaseUser();
             <div class="hidden md:block">
               <ul class="list-none flex">
                 <li>
-                  <UButton color="black" variant="link">
+                  <UButton color="black" variant="link" size="lg">
                     <NuxtLink :to="localePath('/')">
                       {{ $t("findService") }}
                     </NuxtLink>
                   </UButton>
                 </li>
                 <li>
-                  <UButton color="black" variant="link">
+                  <UButton color="black" variant="link" size="lg">
                     <NuxtLink :to="localePath('/cities')">
                       {{ $t("base.cities") }}
                     </NuxtLink>
                   </UButton>
                 </li>
                 <li>
-                  <UButton color="black" variant="link">
+                  <UButton color="black" variant="link" size="lg">
                     <NuxtLink :to="localePath('/')">
                       {{ $t("base.about") }}
                     </NuxtLink>
                   </UButton>
                 </li>
                 <li>
-                  <UButton color="black" variant="link">
+                  <UButton color="black" variant="link" size="lg">
                     <NuxtLink :to="localePath('/')">
                       {{ $t("base.contact") }}
                     </NuxtLink>
@@ -79,11 +81,18 @@ const user = useSupabaseUser();
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <NuxtLink :to="user ? localePath('/account') : '/auth/login'">
-              <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
-              <!-- Dynamically update text based on client-side state -->
-              {{ !user ? $t("base.signIn") : $t("base.myAccount") }}
-            </NuxtLink>
+            <UButton
+              color="white"
+              variant="solid"
+              size="lg"
+              :ui="{ rounded: 'rounded-full' }"
+            >
+              <NuxtLink :to="user ? localePath('/account') : '/auth/login'">
+                <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
+                <!-- Dynamically update text based on client-side state -->
+                {{ !user ? $t("base.signIn") : $t("base.myAccount") }}
+              </NuxtLink>
+            </UButton>
           </div>
         </div>
       </div>

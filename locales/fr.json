@@ -21,6 +21,20 @@
     "myAccount": "Mon compte"
   },
 
+  "account": {
+    "hello": "Bonjour",
+    "accountHeadingMessage": "Gérez votre compte et vos préférences",
+    "profile": "Profil",
+    "preferences": "Préférences",
+    "language": "Langue",
+    "user": {
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "email": "Courriel"
+    },
+    "signOutMessage": "Vous souhaitez vous déconnecter?"
+  },
+
   "occupationType": "Type de profession",
   "occupationTypes": "Types de professions",
   "occupation": "Profession",

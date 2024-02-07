@@ -21,6 +21,20 @@
     "myAccount": "Mi cuenta"
   },
 
+  "account": {
+    "hello": "Hola",
+    "accountHeadingMessage": "Aquí puedes ver y editar tu información de cuenta.",
+    "profile": "Perfil",
+    "preferences": "Preferencias",
+    "language": "Idioma",
+    "user": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico"
+    },
+    "signOutMessage": "¿Estás seguro de que quieres cerrar sesión?"
+  },
+
   "occupationType": "Tipo de ocupación",
   "occupationTypes": "Tipos de ocupación",
   "occupation": "Ocupación",
