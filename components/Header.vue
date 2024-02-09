@@ -20,6 +20,7 @@ const localePath = useLocalePath();
  *
  */
 const user = useSupabaseUser();
+const profileData = await useProfile();
 </script>
 
 <template>
@@ -27,9 +28,11 @@ const user = useSupabaseUser();
     <div
       class="border-b flex justify-between items-center h-16 backdrop-blur-lg bg-white"
     >
-      <div class="container mx-auto px-6 md:max-w-6xl">
+      <div class="mx-auto w-full px-6 md:px-4">
         <div class="flex items-center space-x-8 justify-between">
-          <div id="left-side" class="flex items-center space-x-4">
+          <HeaderNavigation />
+
+          <div class="flex items-center space-x-4">
             <div class="inline-flex items-center justify-center p-0 rounded-md">
               <svg
                 class="h-7 lg:h-6 w-auto mr-2"
@@ -43,56 +46,56 @@ const user = useSupabaseUser();
                 ></path>
               </svg>
               <NuxtLink :to="localePath('/')">
-                <h1 class="font-semibold text-lg mr-2">Optic Genius</h1>
+                <h1 class="font-semibold text-base md:text-lg mr-2">
+                  Optic Genius
+                </h1>
               </NuxtLink>
               <UBadge color="primary" variant="subtle">Alpha</UBadge>
             </div>
-            <div class="hidden md:block">
-              <ul class="list-none flex">
-                <li>
-                  <UButton color="black" variant="link" size="lg">
-                    <NuxtLink :to="localePath('/')">
-                      {{ $t("findService") }}
-                    </NuxtLink>
-                  </UButton>
-                </li>
-                <li>
-                  <UButton color="black" variant="link" size="lg">
-                    <NuxtLink :to="localePath('/cities')">
-                      {{ $t("base.cities") }}
-                    </NuxtLink>
-                  </UButton>
-                </li>
-                <li>
-                  <UButton color="black" variant="link" size="lg">
-                    <NuxtLink :to="localePath('/')">
-                      {{ $t("base.about") }}
-                    </NuxtLink>
-                  </UButton>
-                </li>
-                <li>
-                  <UButton color="black" variant="link" size="lg">
-                    <NuxtLink :to="localePath('/')">
-                      {{ $t("base.contact") }}
-                    </NuxtLink>
-                  </UButton>
-                </li>
-              </ul>
-            </div>
           </div>
+
           <div class="flex items-center space-x-2">
-            <UButton
-              color="white"
-              variant="solid"
-              size="lg"
-              :ui="{ rounded: 'rounded-full' }"
-            >
-              <NuxtLink :to="user ? localePath('/account') : '/auth/login'">
-                <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
-                <!-- Dynamically update text based on client-side state -->
-                {{ !user ? $t("base.signIn") : $t("base.myAccount") }}
-              </NuxtLink>
-            </UButton>
+            <div v-if="user">
+              <UButton
+                color="white"
+                variant="solid"
+                size="lg"
+                :ui="{ rounded: 'rounded-full' }"
+              >
+                <NuxtLink
+                  :to="localePath('/account')"
+                  class="flex items-center"
+                >
+                  <Icon
+                    name="ph:user-circle-duotone"
+                    class="w-5 h-5 mr-0 md:mr-1.5"
+                  />
+                  <span class="hidden md:block">
+                    {{
+                      profileData?.data.first_name &&
+                      profileData?.data.last_name
+                        ? profileData?.data.first_name +
+                          " " +
+                          profileData?.data.last_name
+                        : user.email
+                    }}</span
+                  >
+                </NuxtLink>
+              </UButton>
+            </div>
+            <div v-else>
+              <UButton
+                color="white"
+                variant="solid"
+                size="lg"
+                :ui="{ rounded: 'rounded-full' }"
+              >
+                <NuxtLink :to="localePath('/auth/login')">
+                  <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
+                  {{ $t("base.signIn") }}
+                </NuxtLink>
+              </UButton>
+            </div>
           </div>
         </div>
       </div>

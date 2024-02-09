@@ -43,5 +43,10 @@
   "boroughs": "Distritos",
   "service": "Servicio",
   "services": "Servicios",
-  "serviceType": "Tipo de servicio"
+  "serviceType": "Tipo de servicio",
+
+  "seo": {
+    "description": "Encuentra servicios de optiqua cerca de tu ubicación.",
+    "subDescription": "Le ayudamos a encontrar las mejores necesidades ópticas que Montreal tiene para ofrecer. Desde optometristas hasta ópticos, lo tenemos cubierto"
+  }
 }

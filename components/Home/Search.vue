@@ -1,12 +1,12 @@
 <template>
-  <div class="flex items-center justify-center text-center h-96">
+  <div class="flex items-center justify-center text-center h-full mt-32">
     <div class="flex flex-col justify-center">
       <div
-        class="text-3xl text-center md:text-left font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]"
+        class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-7xl"
       >
         {{ $t("seo.description") }}
       </div>
-      <div class="max-w-[750px] text-center text-lg text-black sm:text-xl mt-2">
+      <div class="mt-6 text-lg tracking-tight text-gray-600 dark:text-gray-300">
         {{ $t("seo.subDescription") }}
       </div>
       <div class="mt-8">

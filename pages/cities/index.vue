@@ -24,8 +24,12 @@ useHead({
 </script>
 
 <template>
-  <div class="mb-12">
-    <main class="lugmt-8">
+  <div class="mt-6">
+    <h1 class="text-3xl font-semibold">All cities</h1>
+    <p class="mt-2 text-gray-500 dark:text-gray-400">
+      Find a service in your city
+    </p>
+    <UCard class="lugmt-8">
       <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
         <UCard v-for="city in data" :key="city.id" class="">
           <NuxtLink :to="localePath('/cities/' + city.value)">{{
@@ -38,6 +42,6 @@ useHead({
           </template>
         </UCard>
       </div>
-    </main>
+    </UCard>
   </div>
 </template>

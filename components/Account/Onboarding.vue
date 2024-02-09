@@ -53,7 +53,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center items-center mt-24 px-8">
+  <UCard class="flex flex-col justify-center items-center mt-24">
     <UIcon name="i-ph-flag-checkered" class="h-16 w-16 mb-6" />
     <h1 class="text-xl md:text-2xl font-semibold">Onboarding</h1>
     <p class="mb-6 text-base md:text-lg text-center mt-4">
@@ -87,7 +87,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
         {{ $t("base.signOut") }}
       </UButton>
     </div>
-  </div>
+  </UCard>
 </template>
 
 <style></style>

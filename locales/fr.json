@@ -43,5 +43,10 @@
   "boroughs": "Arrondissements",
   "service": "Service",
   "services": "Services",
-  "serviceType": "Type de service"
+  "serviceType": "Type de service",
+
+  "seo": {
+    "description": "Trouvez des services optiques proche de chez vous",
+    "subDescription": "Nous vous aidons à trouver les meilleurs besoins en optique que Montréal a à offrir. Des optométristes aux opticiens, nous avons ce qu'il vous faut."
+  }
 }
