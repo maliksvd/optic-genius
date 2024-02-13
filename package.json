@@ -28,6 +28,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@vee-validate/zod": "^4.12.4",
     "@vueuse/core": "^10.7.2",
+    "@vueuse/nuxt": "^10.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "embla-carousel": "^8.0.0-rc21",

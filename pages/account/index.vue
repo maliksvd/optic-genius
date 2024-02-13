@@ -7,7 +7,8 @@
  */
 const client = useSupabaseClient();
 const user = useSupabaseUser();
-const profileData = await useProfile();
+
+console.log(user);
 
 /**
  * Define the locale and the $t function
@@ -52,27 +53,24 @@ const accountTabs = [
 <template>
   <div class="mt-6 md:mt-24">
     <div
-      v-if="
-        profileData.data.first_name !== null &&
-        profileData.data.first_name !== undefined
-      "
+      v-if="user"
       class="flex flex-col md:flex-row space-x-0 space-y-6 md:space-y-0 md:space-x-6"
     >
       <UCard class="w-full md:w-2/4">
         <UAvatar
-          :alt="profileData?.data.first_name"
+          :alt="user.user_metadata.first_name"
           size="xl"
           :ui="{ wrapper: 'border shadow-sm' }"
         />
 
         <h2 class="mt-6 text-xl font-bold tracking-tight">
-          {{ $t("account.hello") }}, {{ profileData?.data.first_name }}
+          {{ $t("account.hello") }}, {{ user.user_metadata.first_name }}
         </h2>
         <p class="text-black mt-1.5 mb-2">
           {{ $t("account.accountHeadingMessage") }}
         </p>
         <UBadge
-          :label="profileData.data.user_type"
+          :label="user.user_metadata.user_type"
           class="capitalize"
           color="primary"
           variant="subtle"
@@ -94,13 +92,15 @@ const accountTabs = [
                     <p class="text-black font-bold">
                       {{ $t("account.user.firstName") }}
                     </p>
-                    <p class="text-black">{{ profileData.data.first_name }}</p>
+                    <p class="text-black">
+                      {{ user.user_metadata.first_name }}
+                    </p>
                   </div>
                   <div>
                     <p class="text-black font-bold">
                       {{ $t("account.user.lastName") }}
                     </p>
-                    <p class="text-black">{{ profileData.data.last_name }}</p>
+                    <p class="text-black">{{ user.user_metadata.last_name }}</p>
                   </div>
                   <div>
                     <p class="text-black font-bold">
@@ -124,7 +124,11 @@ const accountTabs = [
                       {{ $t("base.city") }}
                     </p>
                     <p class="text-black">
-                      {{ profileData.city ? profileData.city : "Not set" }}
+                      {{
+                        user.user_metadata.city
+                          ? user.user_metadata.city
+                          : "Not set"
+                      }}
                     </p>
                   </div>
                   <div>
@@ -133,8 +137,8 @@ const accountTabs = [
                     </p>
                     <p class="text-black">
                       {{
-                        profileData.data.borough
-                          ? profileData.data.borough
+                        user.user_metadata.borough
+                          ? user.user_metadata.borough
                           : "Not set"
                       }}
                     </p>
@@ -156,11 +160,6 @@ const accountTabs = [
           </div>
         </div>
       </UCard>
-    </div>
-    <div v-else>
-      <div>
-        <AccountOnboarding />
-      </div>
     </div>
   </div>
 </template>

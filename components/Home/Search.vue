@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-center justify-center text-center h-full mt-32">
+  <div class="flex items-center justify-center text-center h-full">
     <div class="flex flex-col justify-center">
       <div
-        class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-7xl"
+        class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl max-w-xl text-center"
       >
         {{ $t("seo.description") }}
       </div>

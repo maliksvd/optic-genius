@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "nuxt-icon",
     "@pinia/nuxt",
+    "@vueuse/nuxt",
     "@nuxtjs/supabase",
   ],
 

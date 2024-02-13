@@ -141,30 +141,32 @@ const filteredLocations = computed(() => {
       </div>
     </UCard>
     <main>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div v-for="location in filteredLocations" :key="location.slug">
           <NuxtLink
-            :to="localePath(`/cities/${city}/${location.slug}`)"
+            :to="localePath(`/location/${location.slug}`)"
             :key="location.slug"
           >
-            <img
-              :src="location.storefrontphoto"
-              :alt="location.title"
-              class="w-full h-56 object-cover mb-2 rounded-md"
-            />
-            <div>
-              <div class="text-sm font-semibold">
-                {{ location.title }}
+            <UCard>
+              <img
+                :src="location.storefrontphoto"
+                :alt="location.title"
+                class="w-full h-56 object-cover mb-2 rounded-md"
+              />
+              <div>
+                <div class="text-sm font-semibold">
+                  {{ location.title }}
+                </div>
+                <div class="text-xs">
+                  <span
+                    v-if="location.walk_ins_welcome == 1"
+                    class="text-green-500"
+                    >Walk-ins welcome</span
+                  >
+                  <span v-else class="text-red-500">Walk-ins not welcome</span>
+                </div>
               </div>
-              <div class="text-xs">
-                <span
-                  v-if="location.walk_ins_welcome == 1"
-                  class="text-green-500"
-                  >Walk-ins welcome</span
-                >
-                <span v-else class="text-red-500">Walk-ins not welcome</span>
-              </div>
-            </div>
+            </UCard>
           </NuxtLink>
         </div>
       </div>
