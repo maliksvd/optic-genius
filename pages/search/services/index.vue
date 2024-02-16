@@ -13,7 +13,7 @@ const filteredData = computed(() => {
 </script>
 
 <template>
-  <div class="mt-12">
+  <div class="mt-12" style="stagger: 100" data-animate>
     <h1 class="text-2xl font-bold mb-2">Services</h1>
     <p>Select a service to view the available cities</p>
 
@@ -29,6 +29,8 @@ const filteredData = computed(() => {
         v-for="service in filteredData"
         :key="service.id"
         :to="`/search/services/${service.id}`"
+        style="stagger: 100"
+        data-animate
       >
         <UCard>
           <div class="flex flex-col items-center justify-center">

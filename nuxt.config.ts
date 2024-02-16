@@ -13,6 +13,8 @@ export default defineNuxtConfig({
     "@nuxtjs/supabase",
   ],
 
+  css: ["@/assets/css/animation.css"],
+
   ui: {
     global: true,
     icons: ["ph", "simple-icons", "logos", "line-md"],

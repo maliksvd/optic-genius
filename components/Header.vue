@@ -61,19 +61,19 @@ const itemsNavigation = ref([
           <UVerticalNavigation
             :links="itemsNavigation"
             :ui="{
-              size: 'text-base',
+              size: 'text-sm',
+              font: 'font-normal',
+              inactive: 'text-black',
+              icon: {
+                inactive: 'text-black',
+              },
             }"
           />
         </div>
       </div>
       <div class="px-2 py-2">
         <div v-if="user">
-          <UButton
-            color="white"
-            variant="solid"
-            size="lg"
-            :ui="{ rounded: 'rounded-full' }"
-          >
+          <UButton color="white" variant="solid" size="lg">
             <NuxtLink :to="localePath('/account')" class="flex items-center">
               <Icon
                 name="ph:user-circle-duotone"
@@ -93,23 +93,13 @@ const itemsNavigation = ref([
         </div>
         <div v-else>
           <div class="flex items-center space-x-2 justify-between">
-            <UButton
-              color="white"
-              variant="solid"
-              size="lg"
-              :ui="{ rounded: 'rounded-full' }"
-            >
+            <UButton color="white" variant="solid" size="lg">
               <NuxtLink :to="localePath('/auth/login')">
                 <Icon name="ph:user-circle-duotone" class="w-5 h-5 mr-1.5" />
                 {{ $t("base.signIn") }}
               </NuxtLink>
             </UButton>
-            <UButton
-              color="black"
-              variant="solid"
-              size="lg"
-              :ui="{ rounded: 'rounded-full' }"
-            >
+            <UButton color="black" variant="solid" size="lg">
               <NuxtLink :to="localePath('/auth/register')">
                 <Icon name="ph:plus-circle-duotone" class="w-5 h-5 mr-1.5" />
                 {{ $t("base.signUp") }}

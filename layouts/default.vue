@@ -1,10 +1,18 @@
 <script lang="ts" setup>
+/**
+ * Import from VueUse and Tailwind the breakpoints
+ * @see https://vueuse.org/core/useBreakpoints
+ * @see https://tailwindcss.com/docs/breakpoints
+ *
+ */
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
+import { useMediaQuery } from "@vueuse/core";
 
 /**
  * Get locale and locales from i18n module
  * @see https://i18n.nuxtjs.org/
  */
+
 const { locale, locales } = useI18n();
 
 const getLocales = () => {
@@ -13,19 +21,31 @@ const getLocales = () => {
     value: locale.code,
   }));
 };
+
 const localePath = useLocalePath();
 
+/**
+ * Define the breakpoints for mobile and desktop
+ * @see https://vueuse.org/core/useBreakpoints
+ * @returns {boolean} mobile
+ * @returns {boolean} desktop
+ */
 const breakpoints = useBreakpoints(breakpointsTailwind);
+const mobile = ref(useMediaQuery("(max-width: 768px)"));
+const desktop = ref(!mobile.value);
 
-const mobile = breakpoints.smaller("md");
-const desktop = breakpoints.greaterOrEqual("md");
+watch(mobile, (value) => {
+  desktop.value = !value;
+});
 
-const navigationOpen = ref(false);
+watch(breakpoints, () => {
+  mobile.value = breakpoints.value.sm;
+});
 
-const toggleNavigation = () => {
-  navigationOpen.value = !navigationOpen.value;
-};
-
+/**
+ * Define the itemsNavigation reactive variable
+ * @returns {Array} itemsNavigation
+ */
 const itemsNavigation = ref([
   {
     label: "Home",
@@ -55,34 +75,12 @@ const itemsNavigation = ref([
 ]);
 </script>
 <template>
-  <div class="flex items-start justify-between">
-    <div v-if="mobile">
-      <div class="fixed bottom-0 bg-white border-t py-2 px-4 w-full">
-        <UPopover :popper="{ placement: 'top-start' }">
-          <UButton
-            color="white"
-            variant="solid"
-            size="lg"
-            label="Navigation"
-            icon="i-ph-list"
-            @click="toggleNavigation"
-            :ui="{ rounded: 'rounded-full' }"
-            class="md:hidden"
-          />
-
-          <template #panel>
-            <div class="p-2">
-              <UVerticalNavigation
-                :links="itemsNavigation"
-                :ui="{ size: 'text-base' }"
-              />
-            </div>
-          </template>
-        </UPopover>
-      </div>
-    </div>
-    <div v-else>
+  <div id="wrapper">
+    <div v-if="desktop" id="desktop">
       <Header />
+    </div>
+    <div v-else id="mobile">
+      <MobileNavigation />
     </div>
     <main
       class="container mx-auto grid w-full h-full md:pl-[280px] px-8 md:px-0"

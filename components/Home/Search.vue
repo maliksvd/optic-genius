@@ -15,7 +15,6 @@
           variant="solid"
           size="lg"
           icon="i-ph-magnifying-glass"
-          :ui="{ rounded: 'rounded-full' }"
         >
           <NuxtLink :to="localePath('/cities')">
             {{ $t("findService") }}

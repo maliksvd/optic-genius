@@ -27,7 +27,7 @@ watch(
     <NuxtLink to="/auth/login">
       <UButton
         label="Go back to login"
-        size="xl"
+        size="lg"
         color="white"
         variant="solid"
         icon="i-ph-arrow-left-bold"

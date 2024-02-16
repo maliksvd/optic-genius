@@ -31,7 +31,6 @@ watch(
         size="lg"
         color="white"
         variant="solid"
-        :ui="{ rounded: 'rounded-full' }"
         icon="i-ph-arrow-left-bold"
       />
     </NuxtLink>

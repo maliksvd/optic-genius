@@ -15,6 +15,7 @@ const isDark = computed({
       :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
       color="gray"
       variant="ghost"
+      size="lg"
       aria-label="Theme"
       @click="isDark = !isDark"
     />

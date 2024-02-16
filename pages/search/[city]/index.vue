@@ -108,15 +108,21 @@ const filteredLocations = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div style="--stagger: 1" data-animate>
+    <h1 class="mt-12 text-3xl mb-2">
+      Find a service in
+      <span class="capitalize font-bold">{{ city }}</span>
+    </h1>
+    <p class="mb-4">
+      You can filter the results by service, occupation, and borough.
+    </p>
     <UCard class="my-6">
-      <div class="grid grid-cols-5 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
         <USelect
           v-model="selectedService"
           :options="getServices"
           icon="i-ph-hand-heart"
           size="lg"
-          :ui="{ rounded: 'rounded-full' }"
           placeholder="Select a service"
           class="w-full"
         />
@@ -125,7 +131,6 @@ const filteredLocations = computed(() => {
           :options="getOccupations"
           icon="i-ph-certificate"
           size="lg"
-          :ui="{ rounded: 'rounded-full' }"
           placeholder="Select an occupation"
           class="w-full"
         />
@@ -133,7 +138,6 @@ const filteredLocations = computed(() => {
           v-model="selectedBorough"
           :options="formatBorough"
           size="lg"
-          :ui="{ rounded: 'rounded-full' }"
           icon="i-ph-map-pin"
           placeholder="Select a borough"
           class="w-full"
@@ -142,7 +146,12 @@ const filteredLocations = computed(() => {
     </UCard>
     <main>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div v-for="location in filteredLocations" :key="location.slug">
+        <div
+          v-for="location in filteredLocations"
+          :key="location.slug"
+          style="--stagger: 1"
+          data-animate
+        >
           <NuxtLink
             :to="localePath(`/location/${location.slug}`)"
             :key="location.slug"
@@ -154,16 +163,19 @@ const filteredLocations = computed(() => {
                 class="w-full h-56 object-cover mb-2 rounded-md"
               />
               <div>
-                <div class="text-sm font-semibold">
+                <div class="text-base mt-4 font-semibold">
                   {{ location.title }}
                 </div>
-                <div class="text-xs">
-                  <span
+                <div class="mt-2">
+                  <UBadge
                     v-if="location.walk_ins_welcome == 1"
-                    class="text-green-500"
-                    >Walk-ins welcome</span
+                    color="green"
+                    variant="subtle"
+                    >Walk-ins welcome</UBadge
                   >
-                  <span v-else class="text-red-500">Walk-ins not welcome</span>
+                  <UBadge v-else color="red" variant="subtle"
+                    >Only by appointment</UBadge
+                  >
                 </div>
               </div>
             </UCard>

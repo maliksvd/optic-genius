@@ -10,7 +10,12 @@ const availableLocales = computed(() => {
 <template>
   <div>
     <div class="flex items-center space-x-2">
-      <UButton v-for="locale in availableLocales" color="white" variant="solid">
+      <UButton
+        v-for="locale in availableLocales"
+        color="white"
+        variant="solid"
+        size="lg"
+      >
         <NuxtLink :key="locale.code" :to="switchLocalePath(locale.code)">{{
           locale.name
         }}</NuxtLink></UButton
