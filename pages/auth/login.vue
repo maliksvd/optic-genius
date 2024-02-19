@@ -5,7 +5,7 @@ const user = useSupabaseUser();
 definePageMeta({
   title: "Login",
   description: "Login to your account",
-  layout: "auth",
+  layout: "default",
 });
 
 watchEffect(() => {

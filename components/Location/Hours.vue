@@ -1,9 +1,28 @@
 <script lang="ts" setup>
-defineProps({
-  businessHours: {
-    type: Object,
-    required: true,
-  },
+export interface BusinessHours {
+  [key: string]: { open: string; close: string };
+}
+
+const props = defineProps<{
+  businessHours: BusinessHours;
+}>();
+
+const emit = defineEmits(["update:businessHours"]);
+
+const sortedBusinessHours = computed(() => {
+  const daysOfWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  return daysOfWeek.map((day) => ({
+    day,
+    hours: props.businessHours[day] || { close: "Closed" },
+  }));
 });
 </script>
 
@@ -13,10 +32,10 @@ defineProps({
       Hours
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2">
-      <div v-for="(hours, day) in businessHours" :key="day">
+      <div v-for="{ day, hours } in sortedBusinessHours" :key="day">
         <div>
-          <strong>{{ day }}:</strong> {{ hours.open }} -
-          {{ hours.close }}
+          <strong>{{ day }}:</strong>
+          {{ hours.open ? hours.open + " - " + hours.close : hours.close }}
         </div>
       </div>
     </div>

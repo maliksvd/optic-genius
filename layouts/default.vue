@@ -5,8 +5,15 @@
  * @see https://tailwindcss.com/docs/breakpoints
  *
  */
-import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
-import { useMediaQuery } from "@vueuse/core";
+const { isMobile } = useBasicLayout();
+
+watch(isMobile, (value) => {
+  if (value) {
+    console.log("Mobile");
+  } else {
+    console.log("Desktop");
+  }
+});
 
 /**
  * Get locale and locales from i18n module
@@ -23,24 +30,6 @@ const getLocales = () => {
 };
 
 const localePath = useLocalePath();
-
-/**
- * Define the breakpoints for mobile and desktop
- * @see https://vueuse.org/core/useBreakpoints
- * @returns {boolean} mobile
- * @returns {boolean} desktop
- */
-const breakpoints = useBreakpoints(breakpointsTailwind);
-const mobile = ref(useMediaQuery("(max-width: 768px)"));
-const desktop = ref(!mobile.value);
-
-watch(mobile, (value) => {
-  desktop.value = !value;
-});
-
-watch(breakpoints, () => {
-  mobile.value = breakpoints.value.sm;
-});
 
 /**
  * Define the itemsNavigation reactive variable
@@ -75,17 +64,25 @@ const itemsNavigation = ref([
 ]);
 </script>
 <template>
-  <div id="wrapper">
-    <div v-if="desktop" id="desktop">
-      <Header />
-    </div>
-    <div v-else id="mobile">
-      <MobileNavigation />
-    </div>
-    <main
-      class="container mx-auto grid w-full h-full md:pl-[280px] px-8 md:px-0"
+  <div class="flex h-screen pt-4 max-layout-width relative">
+    <div
+      class="mx-2 pt-2 flex flex-col transition-all duration-300 ease-in-out sm:w-[250px] pr-0 sm:pr-2 hidden sm:flex"
     >
-      <slot />
+      <Header v-if="!isMobile" />
+    </div>
+
+    <MobileNavigation v-if="isMobile" />
+
+    <main
+      style="stagger: 1"
+      data-animate
+      class="bg-white mx-4 md:mx-0 px-8 main-container flex flex-col flex-1 rounded-t-2xl overflow-hidden shadow-md border border-inherit"
+    >
+      <div
+        class="flex flex-col gap-4 px-4 mt-4 custom-overflow overflow-y-auto h-full"
+      >
+        <slot />
+      </div>
     </main>
   </div>
 </template>

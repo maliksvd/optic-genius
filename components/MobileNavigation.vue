@@ -24,6 +24,37 @@
 </template>
 
 <script lang="ts" setup>
+const { locale, locales } = useI18n();
+const localePath = useLocalePath();
+
+const itemsNavigation = ref([
+  {
+    label: "Home",
+    icon: "i-ph-house-simple",
+    to: localePath("/"),
+  },
+  {
+    label: "Find a service",
+    icon: "i-ph-hand-heart",
+    to: localePath("/search/services"),
+  },
+  {
+    label: "Cities",
+    icon: "i-ph-map-trifold",
+    to: localePath("/search/cities"),
+  },
+  {
+    label: "Education",
+    icon: "i-ph-book-bookmark",
+    to: localePath("/education"),
+  },
+  {
+    label: "About",
+    icon: "i-ph-envelope",
+    to: localePath("/about"),
+  },
+]);
+
 const navigationOpen = ref(false);
 
 const toggleNavigation = () => {

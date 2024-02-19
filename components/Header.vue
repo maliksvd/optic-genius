@@ -52,9 +52,7 @@ const itemsNavigation = ref([
 
 <template>
   <div>
-    <div
-      class="bg-white fixed flex-col justify-between gap-4 w-[280px] min-w-[280px] border-r min-h-screen md:flex p-4 hidden z-50 transition-all duration-300 ease-in-out"
-    >
+    <div class="flex flex-col justify-between">
       <div>
         <Logo class="px-2 py-4" />
         <div class="my-12">

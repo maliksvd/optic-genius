@@ -69,6 +69,7 @@ watchEffect(() => {
 const { data: getServices } = await useFetch("/api/services/");
 const { data: getBoroughs } = await useFetch("/api/boroughs?city=" + city);
 const getOccupations = [
+  { label: "Select an occupation", value: "" },
   { label: "Optometrist", value: "optometrist" },
   { label: "Optician", value: "optician" },
   { label: "Ophthalmologist", value: "ophthalmologist" },
@@ -109,7 +110,7 @@ const filteredLocations = computed(() => {
 
 <template>
   <div style="--stagger: 1" data-animate>
-    <h1 class="mt-12 text-3xl mb-2">
+    <h1 class="mt-8 text-3xl mb-2">
       Find a service in
       <span class="capitalize font-bold">{{ city }}</span>
     </h1>
@@ -158,7 +159,7 @@ const filteredLocations = computed(() => {
           >
             <UCard>
               <img
-                :src="location.storefrontphoto"
+                :src="location.storefrontphoto || '/placeholder.png'"
                 :alt="location.title"
                 class="w-full h-56 object-cover mb-2 rounded-md"
               />

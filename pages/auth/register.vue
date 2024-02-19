@@ -4,7 +4,7 @@ const client = useSupabaseClient();
 definePageMeta({
   title: "Register",
   description: "Register to your account",
-  layout: "auth",
+  layout: "default",
 });
 
 import type { FormError, FormSubmitEvent } from "#ui/types";
@@ -54,10 +54,12 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 
 <template>
   <div>
-    <UContainer class="flex justify-center items-center h-screen max-w-sm">
+    <UContainer class="flex justify-center items-center h-screen max-w-lg">
       <div class="w-full flex flex-col gap-y-4">
-        <h1 class="text-center font-bold">Welcome to our platform!</h1>
-        <p class="text-center text-sm">Please register to your account</p>
+        <h1 class="mt-8 text-2xl font-medium">Welcome to Optic Genius!</h1>
+        <p class="mb-4">
+          Register to your account to get started with Optic Genius.
+        </p>
         <UCard :ui="{ body: { base: 'grid grid-cols-1' } }">
           <UForm
             :validate="validate"
