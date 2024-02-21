@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+export interface City {
+  value: string;
+  label: string;
+}
 /**
  * Get the current locale path
  *
@@ -16,16 +20,22 @@ const localePath = useLocalePath();
  * @property {function} refresh
  *
  */
-const { data, pending, error, refresh } = await useFetch("/api/cities");
+const {
+  data: fetchCities,
+  pending,
+  error,
+  refresh,
+} = await useFetch("/api/cities");
+const getCities = ref(fetchCities.value?.cities ?? []);
 
 const search = ref<string>("");
 const filteredData = computed(() => {
   if (search.value) {
-    return data.value.filter((service) =>
-      service.label.toLowerCase().includes(search.value.toLowerCase())
+    return getCities.value.filter((city) =>
+      (city as City).label.toLowerCase().includes(search.value.toLowerCase())
     );
   }
-  return data.value;
+  return getCities.value;
 });
 
 useHead({

@@ -69,7 +69,9 @@ watchEffect(() => {
 const { data: fetchServices } = await useFetch("/api/services/");
 const getServices = ref(fetchServices.value.services);
 
-const { data: getBoroughs } = await useFetch("/api/boroughs?city=" + city);
+const { data: fetchBoroughs } = await useFetch("/api/boroughs?city=" + city);
+const getBoroughs = ref(fetchBoroughs.value);
+
 const getOccupations = [
   { label: "Select an occupation", value: "" },
   { label: "Optometrist", value: "optometrist" },
@@ -139,7 +141,7 @@ const filteredLocations = computed(() => {
         />
         <USelect
           v-model="selectedBorough"
-          :options="formatBorough"
+          :options="formatBorough.map((item) => item.name)"
           size="lg"
           icon="i-ph-map-pin"
           placeholder="Select a borough"
@@ -149,6 +151,14 @@ const filteredLocations = computed(() => {
     </UCard>
     <main>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          v-if="filteredLocations.length === 0"
+          class="text-center w-full flex flex-col justify-center mx-auto"
+        >
+          <p class="text-2xl font-semibold mb-4">
+            No results found for your search
+          </p>
+        </div>
         <div
           v-for="location in filteredLocations"
           :key="location.slug"
