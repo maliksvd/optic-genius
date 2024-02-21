@@ -64,9 +64,9 @@ const itemsNavigation = ref([
 ]);
 </script>
 <template>
-  <div class="flex h-screen pt-4 max-layout-width relative">
+  <div class="flex h-screen max-layout-width relative">
     <div
-      class="mx-2 pt-2 flex flex-col transition-all duration-300 ease-in-out sm:w-[250px] pr-0 sm:pr-2 hidden sm:flex"
+      class="mx-2 flex flex-col transition-all duration-300 ease-in-out sm:w-[250px] pr-0 sm:pr-2 hidden sm:flex"
     >
       <Header v-if="!isMobile" />
     </div>
@@ -76,7 +76,7 @@ const itemsNavigation = ref([
     <main
       style="stagger: 1"
       data-animate
-      class="bg-white mx-4 md:mx-0 px-8 main-container flex flex-col flex-1 rounded-t-2xl overflow-hidden shadow-md border border-inherit"
+      class="bg-white mt-6 mx-4 md:mx-0 px-8 main-container flex flex-col flex-1 rounded-t-2xl overflow-hidden shadow-md border border-inherit"
     >
       <div
         class="flex flex-col gap-4 px-4 mt-4 custom-overflow overflow-y-auto h-full"

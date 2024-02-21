@@ -52,26 +52,36 @@ const itemsNavigation = ref([
 
 <template>
   <div>
-    <div class="flex flex-col justify-between">
+    <div class="flex flex-col justify-between h-dvh py-2">
       <div>
         <Logo class="px-2 py-4" />
         <div class="my-12">
           <UVerticalNavigation
             :links="itemsNavigation"
             :ui="{
-              size: 'text-sm',
-              font: 'font-normal',
-              inactive: 'text-black',
-              icon: {
-                inactive: 'text-black',
-              },
+              wrapper:
+                'border-s border-gray-200 dark:border-gray-800 space-y-2',
+              base: 'flex items-center my-4 border-s -ms-px leading-6 before:hidden',
+              padding: 'p-0 ps-4',
+              rounded: '',
+              font: '',
+              ring: '',
+              active: 'text-black dark:text-white border-current font-semibold',
+              inactive:
+                'border-s-2 border-transparent hover:border-black dark:hover:border-white text-black hover:text-black dark:text-white dark:hover:text-white',
             }"
           />
         </div>
       </div>
       <div class="px-2 py-2">
         <div v-if="user">
-          <UButton color="white" variant="solid" size="lg">
+          <UButton
+            color="white"
+            variant="solid"
+            size="lg"
+            block
+            class="shadow-sm"
+          >
             <NuxtLink :to="localePath('/account')" class="flex items-center">
               <Icon
                 name="ph:user-circle-duotone"

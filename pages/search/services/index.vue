@@ -1,14 +1,21 @@
 <script lang="ts" setup>
+export interface IService {
+  id: string;
+  label: string;
+  icon: string;
+}
 const { data, pending, error, refresh } = await useFetch("/api/services");
 
+const services = ref<IService[]>((data.value?.services as IService[]) || []);
 const search = ref<string>("");
+
 const filteredData = computed(() => {
   if (search.value) {
-    return data.value.filter((service) =>
-      service.label.toLowerCase().includes(search.value.toLowerCase())
+    return services.value.filter((service) =>
+      service.label?.toLowerCase().includes(search.value.toLowerCase())
     );
   }
-  return data.value;
+  return services.value;
 });
 </script>
 
@@ -27,8 +34,8 @@ const filteredData = computed(() => {
     <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
       <NuxtLink
         v-for="service in filteredData"
-        :key="service.id"
-        :to="`/search/services/${service.id}`"
+        :key="service.value"
+        :to="`/search/services/${service.value}`"
         style="stagger: 100"
         data-animate
       >
