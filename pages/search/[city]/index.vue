@@ -66,7 +66,9 @@ watchEffect(() => {
 });
 
 // Get the services and boroughs for the filter from the local api
-const { data: getServices } = await useFetch("/api/services/");
+const { data: fetchServices } = await useFetch("/api/services/");
+const getServices = ref(fetchServices.value.services);
+
 const { data: getBoroughs } = await useFetch("/api/boroughs?city=" + city);
 const getOccupations = [
   { label: "Select an occupation", value: "" },
