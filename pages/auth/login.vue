@@ -5,7 +5,7 @@ const user = useSupabaseUser();
 definePageMeta({
   title: "Login",
   description: "Login to your account",
-  layout: "default",
+  layout: "auth",
 });
 
 watchEffect(() => {
@@ -37,8 +37,9 @@ const signIn = async () => {
   <div>
     <UContainer class="flex justify-center items-center h-screen max-w-sm">
       <div class="w-full flex flex-col gap-y-4">
-        <h1 class="text-center font-bold">Welcome back!</h1>
-        <p class="text-center text-sm">Please sign in to your account</p>
+        <div class="w-full flex justify-center mb-4">
+          <Logo />
+        </div>
         <UCard :ui="{ body: { base: 'grid grid-cols-1' } }">
           <form @submit.prevent="signIn" class="space-y-4">
             <UInput

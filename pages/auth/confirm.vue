@@ -18,20 +18,33 @@ watch(
 );
 </script>
 <template>
-  <div class="flex flex-col justify-center items-center h-screen px-8">
-    <UIcon name="i-ph-check-square-offset-duotone" class="h-16 w-16 mb-6" />
-    <h1 class="text-xl md:text-2xl font-semibold">Email Confirmation</h1>
-    <p class="mb-6 text-base md:text-lg text-center mt-2">
-      Thank you for sign in! Please check your email to confirm your account.
-    </p>
-    <NuxtLink to="/auth/login">
-      <UButton
-        label="Go back to login"
-        size="lg"
-        color="white"
-        variant="solid"
-        icon="i-ph-arrow-left-bold"
-      />
-    </NuxtLink>
-  </div>
+  <UContainer class="flex justify-center items-center h-screen max-w-lg">
+    <div class="w-full flex flex-col gap-y-4">
+      <div class="w-full flex justify-center mb-4">
+        <Logo />
+      </div>
+      <UCard :ui="{ body: { base: 'grid grid-cols-1' } }">
+        <div class="flex flex-col justify-center items-center">
+          <UIcon
+            name="i-ph-check-square-offset-duotone"
+            class="h-12 w-12 mb-6"
+          />
+          <h1 class="text-lg font-semibold">Email Confirmation</h1>
+          <p class="mb-6 text-base text-center px-8 mt-2">
+            Thank you for sign in! Please check your email to confirm your
+            account.
+          </p>
+          <NuxtLink to="/auth/login">
+            <UButton
+              label="Go back to login"
+              size="md"
+              color="white"
+              variant="solid"
+              icon="i-ph-arrow-left-bold"
+            />
+          </NuxtLink>
+        </div>
+      </UCard>
+    </div>
+  </UContainer>
 </template>

@@ -20,7 +20,7 @@ const filteredData = computed(() => {
 </script>
 
 <template>
-  <div class="mt-8" style="stagger: 100" data-animate>
+  <div style="stagger: 100" data-animate>
     <h1 class="text-2xl font-bold mb-2">Services</h1>
     <p>Select a service to view the available cities</p>
 

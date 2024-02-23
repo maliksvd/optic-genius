@@ -42,36 +42,21 @@ const itemsNavigation = ref([
     icon: "i-ph-book-bookmark",
     to: localePath("/education"),
   },
-  {
-    label: "About",
-    icon: "i-ph-envelope",
-    to: localePath("/about"),
-  },
 ]);
 </script>
 
 <template>
   <div>
-    <div class="flex flex-col justify-between h-dvh py-2">
+    <div class="flex items-center justify-between w-full py-2">
+      <Logo class="px-2 py-4" />
       <div>
-        <Logo class="px-2 py-4" />
-        <div class="my-12">
-          <UVerticalNavigation
-            :links="itemsNavigation"
-            :ui="{
-              wrapper:
-                'border-s border-gray-200 dark:border-gray-800 space-y-2',
-              base: 'flex items-center my-4 border-s -ms-px leading-6 before:hidden',
-              padding: 'p-0 ps-4',
-              rounded: '',
-              font: '',
-              ring: '',
-              active: 'text-black dark:text-white border-current font-semibold',
-              inactive:
-                'border-s-2 border-transparent hover:border-black dark:hover:border-white text-black hover:text-black dark:text-white dark:hover:text-white',
-            }"
-          />
-        </div>
+        <UHorizontalNavigation
+          :links="itemsNavigation"
+          :ui="{
+            after:
+              'after:absolute after:bottom-0 after:inset-x-2.5 after:hidden after:h-[2px] after:mt-2',
+          }"
+        />
       </div>
       <div class="px-2 py-2">
         <div v-if="user">

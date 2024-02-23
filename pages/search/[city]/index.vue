@@ -114,7 +114,7 @@ const filteredLocations = computed(() => {
 
 <template>
   <div style="--stagger: 1" data-animate>
-    <h1 class="mt-8 text-3xl mb-2">
+    <h1 class="text-3xl mb-2">
       Find a service in
       <span class="capitalize font-bold">{{ city }}</span>
     </h1>
