@@ -45,7 +45,7 @@ defineProps({
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
       <div v-if="insuranceAccepted" class="flex items-center">
-        <Icon name="ph:identification-badge" class="h-5 w-5 mr-1" />
+        <Icon name="solar:user-id-bold" class="h-5 w-5 mr-1" />
         <div>
           {{
             insuranceAccepted === true
@@ -55,7 +55,7 @@ defineProps({
         </div>
       </div>
       <div v-if="onlineOrderingAvailable" class="flex items-center">
-        <Icon name="ph:laptop" class="h-5 w-5 mr-1" />
+        <Icon name="solar:laptop-minimalistic-bold" class="h-5 w-5 mr-1" />
         <div>
           {{
             onlineOrderingAvailable === true
@@ -75,13 +75,13 @@ defineProps({
         </div>
       </div>
       <div v-if="emergency" class="flex items-center">
-        <Icon name="ph:siren" class="h-5 w-5 mr-1" />
+        <Icon name="solar:siren-bold" class="h-5 w-5 mr-1" />
         <div>
           {{ emergency === true ? "Emergency" : "No Emergency" }}
         </div>
       </div>
       <div v-if="hasContactLens" class="flex items-center">
-        <Icon name="ph:eye" class="h-5 w-5 mr-1" />
+        <Icon name="solar:eye-bold" class="h-5 w-5 mr-1" />
         <div>
           {{
             hasContactLens === true
@@ -91,7 +91,7 @@ defineProps({
         </div>
       </div>
       <div v-if="telehealthServices" class="flex items-center">
-        <Icon name="ph:video" class="h-5 w-5 mr-1" />
+        <Icon name="solar:chat-round-video-bold" class="h-5 w-5 mr-1" />
         <div>
           {{
             telehealthServices === true
@@ -101,7 +101,7 @@ defineProps({
         </div>
       </div>
       <div v-if="averageWaitTime" class="flex items-center">
-        <Icon name="ph:clock" class="h-5 w-5 mr-1" />
+        <Icon name="solar:alarm-bold" class="h-5 w-5 mr-1" />
         <div>
           {{
             averageWaitTime

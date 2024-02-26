@@ -22,11 +22,11 @@ defineProps({
     </h2>
     <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
       <div class="flex items-center">
-        <Icon name="ph:map-pin" class="h-5 w-5 mr-1" />
+        <Icon name="solar:map-point-wave-bold" class="h-5 w-5 mr-1" />
         {{ steetAddress }}
       </div>
       <div class="flex items-center capitalize">
-        <Icon name="ph:map-trifold" class="h-5 w-5 mr-1" />
+        <Icon name="solar:streets-map-point-bold" class="h-5 w-5 mr-1" />
         {{ city }}, {{ province }}
       </div>
     </div>

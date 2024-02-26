@@ -121,80 +121,88 @@ const filteredLocations = computed(() => {
     <p class="mb-4">
       You can filter the results by service, occupation, and borough.
     </p>
-    <UCard class="my-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-        <USelect
-          v-model="selectedService"
-          :options="getServices"
-          icon="i-ph-hand-heart"
-          size="lg"
-          placeholder="Select a service"
-          class="w-full"
-        />
-        <USelect
-          v-model="selectedOccupation"
-          :options="getOccupations"
-          icon="i-ph-certificate"
-          size="lg"
-          placeholder="Select an occupation"
-          class="w-full"
-        />
-        <USelect
-          v-model="selectedBorough"
-          :options="formatBorough.map((item) => item.name)"
-          size="lg"
-          icon="i-ph-map-pin"
-          placeholder="Select a borough"
-          class="w-full"
-        />
-      </div>
-    </UCard>
-    <main>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div
-          v-if="filteredLocations.length === 0"
-          class="text-center w-full flex flex-col justify-center mx-auto"
-        >
-          <p class="text-2xl font-semibold mb-4">
-            No results found for your search
-          </p>
+    <div class="flex space-x-12 items-start justify-center mt-12">
+      <UCard class="w-[350px]">
+        <div class="grid grid-cols-1 gap-4">
+          <USelect
+            v-model="selectedService"
+            :options="getServices"
+            icon="i-solar-help-bold"
+            size="lg"
+            placeholder="Select a service"
+            class="w-full"
+          />
+          <USelect
+            v-model="selectedOccupation"
+            :options="getOccupations"
+            icon="i-solar-diploma-bold"
+            size="lg"
+            placeholder="Select an occupation"
+            class="w-full text-black"
+          />
+          <USelect
+            v-model="selectedBorough"
+            :options="formatBorough.map((item) => item.name)"
+            size="lg"
+            icon="i-solar-map-bold"
+            placeholder="Select a borough"
+            class="w-full"
+          />
         </div>
-        <div
-          v-for="location in filteredLocations"
-          :key="location.slug"
-          style="--stagger: 1"
-          data-animate
-        >
-          <NuxtLink
-            :to="localePath(`/location/${location.slug}`)"
-            :key="location.slug"
+      </UCard>
+      <main>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            v-if="filteredLocations.length === 0"
+            style="--stagger: 1"
+            data-animate
+            class="text-center w-full flex flex-col items-center justify-center mx-auto my-12"
           >
-            <UCard>
-              <img
-                :src="location.storefrontphoto || '/placeholder.png'"
-                :alt="location.title"
-                class="w-full h-56 object-cover mb-2 rounded-md"
-              />
-              <div>
-                <div class="text-base mt-4 font-semibold">
-                  {{ location.title }}
+            <Icon
+              name="i-solar-folder-error-broken"
+              class="text-black w-8 h-8"
+            />
+            <p class="text-2xl font-semibold mb-4 text-center w-full">
+              No results found for your search
+            </p>
+          </div>
+          <div
+            v-for="location in filteredLocations"
+            :key="location.slug"
+            style="--stagger: 1"
+            data-animate
+          >
+            <NuxtLink
+              :to="localePath(`/location/${location.slug}`)"
+              :key="location.slug"
+            >
+              <UCard>
+                <img
+                  :src="location.storefrontphoto || '/placeholder.png'"
+                  :alt="location.title"
+                  class="w-full h-56 object-cover mb-2 rounded-md"
+                />
+                <div>
+                  <div class="text-base mt-4 font-semibold">
+                    {{ location.title }}
+                  </div>
+                  <div class="mt-2">
+                    <UBadge
+                      v-if="location.walk_ins_welcome == 1"
+                      color="green"
+                      variant="subtle"
+                      >Walk-ins welcome</UBadge
+                    >
+                    <UBadge v-else color="red" variant="subtle"
+                      >Only by appointment</UBadge
+                    >
+                  </div>
                 </div>
-                <div class="mt-2">
-                  <UBadge
-                    v-if="location.walk_ins_welcome == 1"
-                    color="green"
-                    variant="subtle"
-                    >Walk-ins welcome</UBadge
-                  >
-                  <UBadge v-else color="red" variant="subtle"
-                    >Only by appointment</UBadge
-                  >
-                </div>
-              </div>
-            </UCard>
-          </NuxtLink>
+              </UCard>
+            </NuxtLink>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>

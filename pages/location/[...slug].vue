@@ -57,7 +57,10 @@ const {
             <template #footer>
               <div class="flex space-x-2 w-full">
                 <UButton color="white" variant="solid" size="lg">
-                  <Icon name="ph:laptop" class="h-5 w-5 mr-1" />
+                  <Icon
+                    name="solar:laptop-minimalistic-bold"
+                    class="h-5 w-5 mr-1"
+                  />
                   <a :href="'https://' + location.website"> Website </a>
                 </UButton>
               </div>

@@ -31,7 +31,7 @@ const filteredData = computed(() => {
       class="mt-4 w-full md:max-w-sm"
     />
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mt-8">
       <NuxtLink
         v-for="service in filteredData"
         :key="service.value"
