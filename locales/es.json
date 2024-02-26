@@ -49,10 +49,24 @@
   "servicesDescription": "Seleccionar un tipo de servicio para ver los servicios disponibles",
   "citiesDescription": "Seleccionar una ciudad para ver los servicios disponibles",
   "searchCity": "Buscar ciudad",
+  "searchService": "Buscar servicio",
 
   "findServiceIn": "Encontrar servicio en",
   "filterBy": "Filtrar por",
   "filterDescription": "Filtrar por tipo de servicio, ocupación y distrito",
+
+  "appointmentOnly": "Solo con cita",
+
+  "selectService": "Seleccionar un servicio",
+  "selectCity": "Seleccionar una ciudad",
+  "selectBorough": "Seleccionar un distrito",
+  "selectOccupation": "Seleccionar una ocupación",
+
+  "askAppointment": "Buscar una cita",
+  "askAppointmentMessage": "Pregunte por una cita",
+
+  "findCity": "Buscar ciudad",
+  "education": "Educación",
 
   "servicesList": {
     "eye_exam": "Examen de la vista",
@@ -69,5 +83,13 @@
   "seo": {
     "description": "Encuentra servicios de optiqua cerca de tu ubicación.",
     "subDescription": "Le ayudamos a encontrar las mejores necesidades ópticas que Montreal tiene para ofrecer. Desde optometristas hasta ópticos, lo tenemos cubierto"
+  },
+
+  "slug": {
+    "title": {
+      "features": "Características",
+      "geolocation": "Geolocalización",
+      "hours": "Horas de operación"
+    }
   }
 }

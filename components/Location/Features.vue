@@ -41,7 +41,7 @@ defineProps({
 <template>
   <div id="featuresSection">
     <h2 class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white">
-      Features
+      {{ $t("slug.title.features") }}
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
       <div v-if="insuranceAccepted" class="flex items-center">

@@ -18,7 +18,7 @@ defineProps({
 <template>
   <div id="geolocationSection">
     <h2 class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white">
-      Geolocation
+      {{ $t("slug.title.geolocation") }}
     </h2>
     <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
       <div class="flex items-center">

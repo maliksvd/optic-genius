@@ -7,11 +7,11 @@ const isAppointmentsModalOpen = ref(false);
 
 <template>
   <div>
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-4">
       <UButton
         color="black"
         variant="solid"
-        label="Book an appointment"
+        :label="$t('askAppointment')"
         size="xl"
         @click="isAppointmentsModalOpen = true"
       />
@@ -29,9 +29,9 @@ const isAppointmentsModalOpen = ref(false);
         }"
       >
         <template #header>
-          <h3 class="text-xl font-bold">Book an appointment</h3>
-          <p class="text-sm">
-            Choose a date and time to book an appointment with this location.
+          <h3 class="text-xl font-bold">{{ $t("askAppointment") }}</h3>
+          <p class="text-base">
+            {{ $t("askAppointmentMessage") }}
           </p>
         </template>
 

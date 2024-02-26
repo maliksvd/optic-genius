@@ -29,7 +29,7 @@ const sortedBusinessHours = computed(() => {
 <template>
   <div id="hoursSection">
     <h2 class="mb-4 text-xl md:text-2xl font-bold text-black dark:text-white">
-      Hours
+      {{ $t("slug.title.hours") }}
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div v-for="{ day, hours } in sortedBusinessHours" :key="day">

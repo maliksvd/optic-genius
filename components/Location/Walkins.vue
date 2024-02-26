@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const { locale } = useI18n();
 defineProps<{
   isWalkinsWelcome: boolean;
 }>();
@@ -12,7 +13,7 @@ defineProps<{
     </UBadge>
     <UBadge color="red" variant="subtle" v-else>
       <Icon name="ph:calendar" class="h-5 w-5 mr-1" />
-      With Appointment Only
+      {{ $t("appointmentOnly") }}
     </UBadge>
   </div>
 </template>

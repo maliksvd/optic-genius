@@ -22,21 +22,6 @@ const localePath = useLocalePath();
 const user = useSupabaseUser();
 
 const isMobile = useBasicLayout();
-
-const itemsNavigation = ref([
-  {
-    label: "navigationFindCities",
-    to: localePath("/search/cities"),
-  },
-  {
-    label: "Services",
-    to: localePath("/search/services"),
-  },
-  {
-    label: "Education",
-    to: localePath("/education"),
-  },
-]);
 </script>
 
 <template>
@@ -45,7 +30,11 @@ const itemsNavigation = ref([
       <div class="block md:flex items-center space-x-4">
         <Logo class="px-2 py-4 w-full" />
         <UHorizontalNavigation
-          :links="itemsNavigation"
+          :links="[
+            { label: $t('findCity'), to: localePath('/search/cities') },
+            { label: $t('services'), to: localePath('/search/services') },
+            { label: $t('education'), to: localePath('/education') },
+          ]"
           :ui="{
             base: 'hidden md:flex text-base',
             after:
@@ -57,11 +46,11 @@ const itemsNavigation = ref([
         <DarkMode />
         <LanguageSwitcher :locales="getLocales" />
         <UButton
-          label="Ask an appointment"
+          :label="$t('askAppointment')"
           icon="i-solar-calendar-search-bold"
           size="xl"
           color="black"
-          to="/search/cities"
+          :to="localePath('/search/cities')"
         />
       </div>
       <div v-if="isMobile" class="md:hidden">

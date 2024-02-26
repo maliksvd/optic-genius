@@ -15,6 +15,11 @@
   },
 
   "findService": "Find a service",
+  "findCity": "Find a city",
+  "education": "Education",
+
+  "askAppointment": "Ask an appointment",
+  "askAppointmentMessage": "Fill out the form to ask an appointment.",
 
   "base": {
     "city": "City",
@@ -57,6 +62,14 @@
   "servicesDescription": "Select a service to view the available cities.",
   "citiesDescription": "Select a city to view the available services.",
   "searchCity": "Search a city",
+  "searchService": "Search a service",
+
+  "selectService": "Select a service",
+  "selectCity": "Select a city",
+  "selectBorough": "Select a borough",
+  "selectOccupation": "Select an occupation",
+
+  "appointmentOnly": "With appointment only",
 
   "findServiceIn": "Find a service in",
   "filterBy": "Filter by",
@@ -77,5 +90,13 @@
   "seo": {
     "description": "Find optical and eye-care professionals near you.",
     "subDescription": "We help you find the best optical needs Montreal has to offer. From optometrists to opticians, we have you covered."
+  },
+
+  "slug": {
+    "title": {
+      "features": "Features",
+      "geolocation": "Geolocation",
+      "hours": "Business hours"
+    }
   }
 }

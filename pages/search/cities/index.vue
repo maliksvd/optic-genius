@@ -63,12 +63,12 @@ useHead({
 
     <UInput
       v-model="search"
-      placeholder="Search a city"
+      :placeholder="$t('searchCity')"
       size="xl"
       class="mt-4 w-full md:max-w-sm"
     />
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mt-8">
       <NuxtLink
         v-for="city in filteredData"
         :key="city.value"
@@ -78,7 +78,7 @@ useHead({
       >
         <UCard>
           <div class="flex flex-col items-center justify-center">
-            <h1 class="text-sm">{{ city.label }}</h1>
+            <h1 class="text-base">{{ city.label }}</h1>
           </div>
         </UCard>
       </NuxtLink>

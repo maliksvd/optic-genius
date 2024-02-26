@@ -110,6 +110,17 @@ const filteredLocations = computed(() => {
   }
   return []; // Retourne un tableau vide si allLocations n'est pas encore défini
 });
+
+useSeoMeta({
+  title: "Find service in " + city,
+  description: "Find the best service in " + city,
+  lang: locale.value,
+  ogTitle: "Find service in " + city,
+  ogDescription: "Find the best service in " + city,
+  twitterTitle: "Find service in " + city,
+  twitterDescription: "Find the best service in " + city,
+  twitterCard: "app",
+});
 </script>
 
 <template>
@@ -127,35 +138,38 @@ const filteredLocations = computed(() => {
     <div
       class="flex flex-col md:flex-row space-x-0 space-y-12 md:space-y-0 md:space-x-12 items-start justify-center mt-12"
     >
-      <UCard class="w-full md:w-[450px] md:sticky md:h-screen md:top-8">
-        <h2 class="text-lg font-semibold mb-4">{{ $t("filterBy") }}</h2>
-        <div class="grid grid-cols-1 gap-4">
-          <USelect
-            v-model="selectedService"
-            :options="getServices"
-            icon="i-solar-help-bold"
-            size="xl"
-            placeholder="Select a service"
-            class="w-full"
-          />
-          <USelect
-            v-model="selectedOccupation"
-            :options="getOccupations"
-            icon="i-solar-diploma-bold"
-            size="xl"
-            placeholder="Select an occupation"
-            class="w-full text-black"
-          />
-          <USelect
-            v-model="selectedBorough"
-            :options="formatBorough.map((item) => item.name)"
-            size="xl"
-            icon="i-solar-map-bold"
-            placeholder="Select a borough"
-            class="w-full"
-          />
-        </div>
-      </UCard>
+      <aside class="w-full md:w-[450px] md:sticky md:h-screen md:top-8">
+        <UCard>
+          <h2 class="text-lg font-semibold mb-4">{{ $t("filterBy") }}</h2>
+          <div class="grid grid-cols-1 gap-4">
+            <USelect
+              v-model="selectedService"
+              :options="getServices"
+              icon="i-solar-help-bold"
+              size="xl"
+              :placeholder="$t('selectService')"
+              class="w-full"
+            />
+            <USelect
+              v-model="selectedOccupation"
+              :options="getOccupations"
+              icon="i-solar-diploma-bold"
+              size="xl"
+              :placeholder="$t('selectOccupation')"
+              class="w-full text-black"
+            />
+            <USelect
+              v-model="selectedBorough"
+              :options="formatBorough.map((item) => item.name)"
+              size="xl"
+              icon="i-solar-map-bold"
+              :placeholder="$t('selectBorough')"
+              class="w-full"
+            />
+          </div>
+        </UCard>
+      </aside>
+
       <main>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div

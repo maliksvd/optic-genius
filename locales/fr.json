@@ -49,7 +49,21 @@
   "servicesDescription": "Séletionnez un type de service pour voir les professionnels disponibles",
   "citiesDescription": "Sélectionnez une ville pour voir les professionnels disponibles",
 
+  "selectService": "Sélectionnez un service",
+  "selectCity": "Sélectionnez une ville",
+  "selectBorough": "Sélectionnez un arrondissement",
+  "selectOccupation": "Sélectionnez une profession",
+
+  "appointmentOnly": "Sur rendez-vous seulement",
+
+  "askAppointment": "Trouver un rendez-vous",
+  "askAppointmentMessage": "Remplissez le formulaire pour demander un rendez-vous",
+
+  "findCity": "Trouver une ville",
+  "education": "Éducation",
+
   "searchCity": "Rechercher une ville",
+  "searchService": "Rechercher un service",
 
   "findServiceIn": "Trouver un service à",
   "filterBy": "Filtrer par",
@@ -70,5 +84,13 @@
   "seo": {
     "description": "Trouvez des services optiques proche de chez vous",
     "subDescription": "Nous vous aidons à trouver les meilleurs besoins en optique que Montréal a à offrir. Des optométristes aux opticiens, nous avons ce qu'il vous faut."
+  },
+
+  "slug": {
+    "title": {
+      "features": "Caractéristiques",
+      "geolocation": "Géolocalisation",
+      "hours": "Heures d'ouverture"
+    }
   }
 }

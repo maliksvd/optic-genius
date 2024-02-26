@@ -29,7 +29,7 @@ const filteredData = computed(() => {
 
     <UInput
       v-model="search"
-      placeholder="Search services"
+      :placeholder="$t('searchService')"
       size="xl"
       class="mt-4 w-full md:max-w-sm"
     />

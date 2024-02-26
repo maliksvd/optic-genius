@@ -47,10 +47,9 @@ const {
         <div class="w-full md:w-96 md:sticky md:h-screen md:top-8">
           <UCard style="--stagger: 1" data-animate>
             <template #header>
-              <h3 class="text-xl font-bold">Book an appointment</h3>
+              <h3 class="text-xl font-bold">{{ $t("askAppointment") }}</h3>
               <p class="text-sm">
-                Book an appointment with this location. You can also call them
-                directly.
+                {{ $t("askAppointmentMessage") }}
               </p>
             </template>
             <LocationAppointmentModal :phone="location.phone" />
