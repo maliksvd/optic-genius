@@ -40,11 +40,31 @@
   "occupationTypes": "Occupation types",
   "occupation": "Occupation",
   "occupations": "Occupations",
+  "cities": "Cities",
   "borough": "Borough",
   "boroughs": "Boroughs",
   "service": "Service",
   "services": "Services",
   "serviceType": "Service type",
+  "servicesDescription": "Select a service to view the available cities.",
+  "citiesDescription": "Select a city to view the available services.",
+  "searchCity": "Search a city",
+
+  "findServiceIn": "Find a service in",
+  "filterBy": "Filter by",
+  "filterDescription": "Filter by occupation type, occupation, and service type.",
+
+  "servicesList": {
+    "eye_exam": "Eye Exam",
+    "adjustment": "Adjustment",
+    "contact_lens": "Contact Lenses",
+    "stylist": "Stylist",
+    "laser_eye_surgery": "Laser Eye Surgery",
+    "eye_disease": "Eye Disease",
+    "emergency": "Emergency",
+    "other": "Other",
+    "repair": "Repair"
+  },
 
   "seo": {
     "description": "Find optical and eye-care professionals near you.",

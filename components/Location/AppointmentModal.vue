@@ -12,11 +12,11 @@ const isAppointmentsModalOpen = ref(false);
         color="black"
         variant="solid"
         label="Book an appointment"
-        size="lg"
+        size="xl"
         @click="isAppointmentsModalOpen = true"
       />
 
-      <UButton color="white" variant="solid" size="lg">
+      <UButton color="white" variant="solid" size="xl">
         <a :href="'tel:' + phone"> Call {{ phone }}</a>
       </UButton>
     </div>

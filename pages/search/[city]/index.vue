@@ -114,21 +114,27 @@ const filteredLocations = computed(() => {
 
 <template>
   <div style="--stagger: 1" data-animate>
-    <h1 class="text-3xl mb-2">
-      Find a service in
+    <h1
+      class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white tracking-tight"
+    >
+      {{ $t("findServiceIn") }}
       <span class="capitalize font-bold">{{ city }}</span>
     </h1>
-    <p class="mb-4">
-      You can filter the results by service, occupation, and borough.
+    <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
+      {{ $t("filterDescription") }}
     </p>
-    <div class="flex space-x-12 items-start justify-center mt-12">
-      <UCard class="w-[350px]">
+    <UDivider class="my-8" />
+    <div
+      class="flex flex-col md:flex-row space-x-0 space-y-12 md:space-y-0 md:space-x-12 items-start justify-center mt-12"
+    >
+      <UCard class="w-full md:w-[450px] md:sticky md:h-screen md:top-8">
+        <h2 class="text-lg font-semibold mb-4">{{ $t("filterBy") }}</h2>
         <div class="grid grid-cols-1 gap-4">
           <USelect
             v-model="selectedService"
             :options="getServices"
             icon="i-solar-help-bold"
-            size="lg"
+            size="xl"
             placeholder="Select a service"
             class="w-full"
           />
@@ -136,14 +142,14 @@ const filteredLocations = computed(() => {
             v-model="selectedOccupation"
             :options="getOccupations"
             icon="i-solar-diploma-bold"
-            size="lg"
+            size="xl"
             placeholder="Select an occupation"
             class="w-full text-black"
           />
           <USelect
             v-model="selectedBorough"
             :options="formatBorough.map((item) => item.name)"
-            size="lg"
+            size="xl"
             icon="i-solar-map-bold"
             placeholder="Select a borough"
             class="w-full"
@@ -180,10 +186,10 @@ const filteredLocations = computed(() => {
                 <img
                   :src="location.storefrontphoto || '/placeholder.png'"
                   :alt="location.title"
-                  class="w-full h-56 object-cover mb-2 rounded-md"
+                  class="w-full h-56 object-cover mb-2 rounded-md dark:opacity-30"
                 />
                 <div>
-                  <div class="text-base mt-4 font-semibold">
+                  <div class="text-lg mt-4 font-semibold">
                     {{ location.title }}
                   </div>
                   <div class="mt-2">

@@ -8,7 +8,7 @@
       Sorry, we couldn't find the location you're looking for.
     </p>
     <NuxtLink to="/">
-      <UButton color="black" variant="solid" size="lg" class="mt-4">
+      <UButton color="black" variant="solid" size="xl" class="mt-4">
         Go back to home
       </UButton>
     </NuxtLink>

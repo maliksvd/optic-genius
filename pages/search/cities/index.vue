@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const { locale } = useI18n();
+
 export interface City {
   value: string;
   label: string;
@@ -45,13 +47,13 @@ useHead({
 
 <template>
   <div style="stagger: 100" data-animate>
-    <h1 class="text-2xl font-bold mb-2">Cities</h1>
-    <p>Select a city to view the available services</p>
+    <h1 class="text-2xl font-bold mb-2">{{ $t("cities") }}</h1>
+    <p>{{ $t("citiesDescription") }}</p>
 
     <UInput
       v-model="search"
       placeholder="Search a city"
-      size="lg"
+      size="xl"
       class="mt-4 w-full md:max-w-sm"
     />
 
@@ -59,7 +61,7 @@ useHead({
       <NuxtLink
         v-for="city in filteredData"
         :key="city.value"
-        :to="`/search/${city.value}`"
+        :to="localePath(`/search/${city.value}`)"
         style="stagger: 100"
         data-animate
       >

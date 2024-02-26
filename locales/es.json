@@ -42,9 +42,29 @@
   "occupations": "Ocupaciones",
   "borough": "Distrito",
   "boroughs": "Distritos",
+  "cities": "Ciudades",
   "service": "Servicio",
   "services": "Servicios",
   "serviceType": "Tipo de servicio",
+  "servicesDescription": "Seleccionar un tipo de servicio para ver los servicios disponibles",
+  "citiesDescription": "Seleccionar una ciudad para ver los servicios disponibles",
+  "searchCity": "Buscar ciudad",
+
+  "findServiceIn": "Encontrar servicio en",
+  "filterBy": "Filtrar por",
+  "filterDescription": "Filtrar por tipo de servicio, ocupación y distrito",
+
+  "servicesList": {
+    "eye_exam": "Examen de la vista",
+    "adjustment": "Ajuste",
+    "contact_lens": "Lentes de contacto",
+    "stylist": "Estilista",
+    "laser_eye_surgery": "Cirugía láser de ojos",
+    "eye_disease": "Enfermedad ocular",
+    "emergency": "Emergencia",
+    "other": "Otro",
+    "repair": "Reparación"
+  },
 
   "seo": {
     "description": "Encuentra servicios de optiqua cerca de tu ubicación.",

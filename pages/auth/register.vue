@@ -69,7 +69,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
             <UFormGroup label="Email" name="email">
               <UInput
                 v-model="state.email"
-                size="lg"
+                size="xl"
                 icon="i-ph-envelope"
                 placeholder="example@opticgenius.ca"
               />
@@ -80,31 +80,31 @@ async function onSubmit(event: FormSubmitEvent<any>) {
                 v-model="state.password"
                 type="password"
                 placeholder="************"
-                size="lg"
+                size="xl"
                 icon="i-ph-lock-key"
               />
             </UFormGroup>
 
             <UFormGroup label="First Name" name="first_name">
-              <UInput v-model="state.first_name" size="lg" />
+              <UInput v-model="state.first_name" size="xl" />
             </UFormGroup>
 
             <UFormGroup label="Last Name" name="last_name">
-              <UInput v-model="state.last_name" size="lg" />
+              <UInput v-model="state.last_name" size="xl" />
             </UFormGroup>
 
             <UFormGroup label="Are you a professional?" name="user_type">
               <USelect
                 v-model="state.user_type"
                 icon="i-ph-address-book"
-                size="lg"
+                size="xl"
                 :options="['customer', 'professional']"
               />
             </UFormGroup>
 
             <UButton
               label="Login to your account"
-              size="lg"
+              size="xl"
               color="black"
               block
               type="submit"

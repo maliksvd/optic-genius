@@ -13,7 +13,7 @@
         <UButton
           color="white"
           variant="solid"
-          size="lg"
+          size="xl"
           icon="i-ph-magnifying-glass"
         >
           <NuxtLink :to="localePath('/cities')">

@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+const { locale } = useI18n();
+const localePath = useLocalePath();
+
 export interface IService {
   id: string;
   label: string;
@@ -21,13 +24,13 @@ const filteredData = computed(() => {
 
 <template>
   <div style="stagger: 100" data-animate>
-    <h1 class="text-2xl font-bold mb-2">Services</h1>
-    <p>Select a service to view the available cities</p>
+    <h1 class="text-2xl font-bold mb-2">{{ $t("services") }}</h1>
+    <p>{{ $t("servicesDescription") }}</p>
 
     <UInput
       v-model="search"
       placeholder="Search services"
-      size="lg"
+      size="xl"
       class="mt-4 w-full md:max-w-sm"
     />
 
@@ -35,7 +38,7 @@ const filteredData = computed(() => {
       <NuxtLink
         v-for="service in filteredData"
         :key="service.value"
-        :to="`/search/services/${service.value}`"
+        :to="localePath(`/search/services/${service.value}`)"
         style="stagger: 100"
         data-animate
       >

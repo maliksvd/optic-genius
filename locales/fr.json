@@ -42,9 +42,30 @@
   "occupations": "Professions",
   "borough": "Arrondissement",
   "boroughs": "Arrondissements",
+  "cities": "Villes",
   "service": "Service",
   "services": "Services",
   "serviceType": "Type de service",
+  "servicesDescription": "Séletionnez un type de service pour voir les professionnels disponibles",
+  "citiesDescription": "Sélectionnez une ville pour voir les professionnels disponibles",
+
+  "searchCity": "Rechercher une ville",
+
+  "findServiceIn": "Trouver un service à",
+  "filterBy": "Filtrer par",
+  "filterDescription": "Filtrez les résultats pour trouver le service qui vous convient",
+
+  "servicesList": {
+    "eye_exam": "Examen de la vue",
+    "adjustment": "Ajustement de lunettes",
+    "contact_lens": "Lentilles de contact",
+    "stylist": "Styliste",
+    "laser_eye_surgery": "Chirurgie oculaire au laser",
+    "eye_disease": "Maladie oculaire",
+    "emergency": "Urgence",
+    "other": "Autre",
+    "repair": "Réparation"
+  },
 
   "seo": {
     "description": "Trouvez des services optiques proche de chez vous",

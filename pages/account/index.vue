@@ -152,7 +152,7 @@ const accountTabs = [
           <div class="flex flex-col justify-end">
             <UButton
               label="Sign out"
-              size="lg"
+              size="xl"
               icon="i-ph-person-simple-run"
               color="white"
               variant="solid"

@@ -45,20 +45,20 @@ const signIn = async () => {
             <UInput
               v-model="email"
               type="email"
-              size="lg"
+              size="xl"
               placeholder="Enter your email"
               icon="i-ph-envelope"
             />
             <UInput
               v-model="password"
               type="password"
-              size="lg"
+              size="xl"
               placeholder="Enter your password"
               icon="i-ph-lock-key"
             />
             <UButton
               label="Login to your account"
-              size="lg"
+              size="xl"
               color="black"
               block
               type="submit"

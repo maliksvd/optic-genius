@@ -56,7 +56,7 @@ const {
             <LocationAppointmentModal :phone="location.phone" />
             <template #footer>
               <div class="flex space-x-2 w-full">
-                <UButton color="white" variant="solid" size="lg">
+                <UButton color="white" variant="solid" size="xl">
                   <Icon
                     name="solar:laptop-minimalistic-bold"
                     class="h-5 w-5 mr-1"
