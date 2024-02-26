@@ -6,6 +6,14 @@
   "yes": "Yes",
   "no": "No",
 
+  "pages": {
+    "title": {
+      "findCities": "Find a Cities",
+      "findServices": "Services",
+      "education": "Education"
+    }
+  },
+
   "findService": "Find a service",
 
   "base": {

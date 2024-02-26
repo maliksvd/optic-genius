@@ -1,6 +1,17 @@
 <script lang="ts" setup>
 const { locale } = useI18n();
 
+useSeoMeta({
+  title: "Optic Genius" as string,
+  description: "Discover the best eye professionals near you" as string,
+  lang: locale.value as string | undefined,
+  ogTitle: "Optic Genius" as string,
+  ogDescription: "Find the eye professional near you" as string,
+  twitterTitle: "Optic Genius" as string,
+  twitterDescription: "Find the eye professional near you" as string,
+  twitterCard: "app" as string,
+});
+
 export interface City {
   value: string;
   label: string;

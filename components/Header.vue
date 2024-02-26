@@ -25,7 +25,7 @@ const isMobile = useBasicLayout();
 
 const itemsNavigation = ref([
   {
-    label: "Find a Cities",
+    label: "navigationFindCities",
     to: localePath("/search/cities"),
   },
   {
