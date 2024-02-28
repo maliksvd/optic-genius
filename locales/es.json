@@ -68,6 +68,21 @@
   "findCity": "Buscar ciudad",
   "education": "Educación",
 
+  "learnMore": "Aprender más",
+
+  "pages": {
+    "title": {
+      "findCities": "Buscar ciudades",
+      "findServices": "Servicios",
+      "education": "Educación"
+    },
+    "home": {
+      "title": "Encuentra servicios de optiqua cerca de tu ubicación.",
+      "subTitle": "Le ayudamos a encontrar las mejores necesidades ópticas que Montreal tiene para ofrecer. Desde optometristas hasta ópticos, lo tenemos cubierto",
+      "searchButton": "Encuentra un lugar"
+    }
+  },
+
   "servicesList": {
     "eye_exam": "Examen de la vista",
     "adjustment": "Ajuste",

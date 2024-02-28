@@ -59,6 +59,21 @@
   "askAppointment": "Trouver un rendez-vous",
   "askAppointmentMessage": "Remplissez le formulaire pour demander un rendez-vous",
 
+  "learnMore": "En savoir plus",
+
+  "pages": {
+    "title": {
+      "findCities": "Trouver des villes",
+      "findServices": "Services",
+      "education": "Éducation"
+    },
+    "home": {
+      "title": "Trouver des services optiques proche de chez vous",
+      "subTitle": "Nous vous aidons à trouver les meilleurs besoins en optique que Montréal a à offrir. Des optométristes aux opticiens, nous avons ce qu'il vous faut.",
+      "searchButton": "Rechercher un emplacement"
+    }
+  },
+
   "findCity": "Trouver une ville",
   "education": "Éducation",
 

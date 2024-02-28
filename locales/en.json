@@ -6,11 +6,18 @@
   "yes": "Yes",
   "no": "No",
 
+  "learnMore": "Learn more",
+
   "pages": {
     "title": {
       "findCities": "Find a Cities",
       "findServices": "Services",
       "education": "Education"
+    },
+    "home": {
+      "title": "Find optical and eye-care professionals near you.",
+      "subTitle": "We help you find the best optical needs Montreal has to offer. From optometrists to opticians, we have you covered.",
+      "searchButton": "Find a location"
     }
   },
 

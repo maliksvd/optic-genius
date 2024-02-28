@@ -14,10 +14,26 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="my-12">
-    <UCard>
-      <h1>test</h1>
-      <p>test</p>
-    </UCard>
+  <div class="container mx-auto px-container">
+    <div
+      class="container mx-auto max-w-3xl flex flex-col items-center justify-center"
+    >
+      <h1
+        class="text-center text-4xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]"
+      >
+        {{ $t("pages.home.title") }}
+      </h1>
+      <p
+        class="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl mt-6"
+      >
+        {{ $t("pages.home.subTitle") }}
+      </p>
+      <div class="flex items-center space-x-2 mt-8">
+        <HomeSearchModal />
+        <UButton size="xl" color="white" icon="i-solar-info-square-bold">
+          {{ $t("learnMore") }}
+        </UButton>
+      </div>
+    </div>
   </div>
 </template>

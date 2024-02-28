@@ -66,7 +66,7 @@ const itemsNavigation = ref([
 <template>
   <div>
     <div
-      class="bg-white dark:bg-gray-900 ring-1 ring-inset ring-gray-300 dark:ring-gray-700 px-8 transition-all duration-300 ease-in-out"
+      class="bg-white dark:bg-[#171717] ring-1 ring-inset ring-gray-300 dark:ring-gray-700 px-8 transition-all duration-300 ease-in-out"
     >
       <Header />
     </div>
@@ -74,7 +74,7 @@ const itemsNavigation = ref([
     <main
       style="stagger: 1"
       data-animate
-      class="bg-white dark:bg-gray-900 md:m-12 py-16 px-8 rounded-md overflow-hidden min-h-screen"
+      class="bg-white dark:bg-[#171717] md:m-12 py-16 px-8 rounded-md overflow-hidden min-h-screen"
     >
       <slot />
     </main>
